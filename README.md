@@ -1,6 +1,8 @@
 # Grade Tracker
 
-CST 338 Project 2 - JavaFX desktop app for tracking assignments and grades.
+A desktop grade tracking app where students can view their grades, teachers
+can manage assignments and enter scores, and admins can manage users and
+courses. Built with JavaFX and SQLite.
 
 ## Team
 - Mikey Voss
@@ -10,5 +12,6 @@ CST 338 Project 2 - JavaFX desktop app for tracking assignments and grades.
 
 ## Tech
 - Java / JavaFX
+- AtlantaFX
 - Gradle
 - SQLite (JDBC)
