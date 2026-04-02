@@ -5,10 +5,10 @@ can manage assignments and enter scores, and admins can manage users and
 courses. Built with JavaFX, SQLite, and AtlantaFX for UI.
 
 ## Team
-- Mikey Voss
-- Harvey Duran
 - Olga Bradford
+- Harvey Duran
 - Robert Mozzetti
+- Mikey Voss
 
 ## Tech
 - Java / JavaFX
