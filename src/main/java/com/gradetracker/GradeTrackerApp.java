@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 /**
  * Entry point for the Grade Tracker application.
  *
- * @author Otterware
+ * @author Mikey Voss
  * @since 2026-04-02
  */
 public class GradeTrackerApp extends Application {
