@@ -21,6 +21,10 @@ build/
 *.ipr
 out/
 
+# Gradle local settings
+gradle.properties
+local.properties
+
 # macOS
 .DS_Store
 
