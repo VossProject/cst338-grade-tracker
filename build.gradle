@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'com.gradetracker'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = '24'
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+dependencies {
+    implementation 'io.github.mkpaz:atlantafx-base:2.0.1'
+    implementation 'org.xerial:sqlite-jdbc:3.49.1.0'
+}
+
+application {
+    mainClass = 'com.gradetracker.GradeTrackerApp'
+    mainModule = 'com.gradetracker'
+    applicationDefaultJvmArgs = ['--enable-native-access=javafx.graphics']
+}
+
+checkstyle {
+    toolVersion = '10.21.4'
+}
+
+test {
+    useJUnitPlatform()
+}
