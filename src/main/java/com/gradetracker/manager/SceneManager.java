@@ -1,0 +1,38 @@
+com.gradetracker.manager.SceneManager
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+/**
+ *
+ *
+ * @author Harvey Duran
+ * @since TBD
+ */
+public class SceneManager {
+
+  private final Stage stage;
+
+  public SceneManager(Stage stage) {
+    this.stage = stage;
+  }
+
+  public void switchScene(String fxmlFile, String title) {
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+      Parent root = loader.load();
+
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle(title);
+      stage.show();
+    }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+}
