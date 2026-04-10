@@ -1,4 +1,4 @@
-com.gradetracker.manager.SceneManager
+package com.gradetracker.manager;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- *
+ * Handles scene switching for application.
  *
  * @author Harvey Duran
  * @since TBD
