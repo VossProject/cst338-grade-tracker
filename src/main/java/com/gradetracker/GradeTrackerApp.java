@@ -15,20 +15,20 @@ import javafx.stage.Stage;
  */
 public class GradeTrackerApp extends Application {
 
-    @Override
-    public void start(Stage stage) {
-        Application.setUserAgentStylesheet(new Dracula().getUserAgentStylesheet());
+  @Override
+  public void start(Stage stage) {
+    Application.setUserAgentStylesheet(new Dracula().getUserAgentStylesheet());
 
-        Label label = new Label("Grade Tracker");
-        StackPane root = new StackPane(label);
-        Scene scene = new Scene(root, 800, 600);
+    Label label = new Label("Grade Tracker");
+    StackPane root = new StackPane(label);
+    Scene scene = new Scene(root, 800, 600);
 
-        stage.setTitle("Grade Tracker");
-        stage.setScene(scene);
-        stage.show();
-    }
+    stage.setTitle("Grade Tracker");
+    stage.setScene(scene);
+    stage.show();
+  }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+  public static void main(String[] args) {
+    launch(args);
+  }
 }
