@@ -12,6 +12,11 @@ import javafx.scene.control.TextField;
  * @since 04/24/26
  */
 public class LoginController {
+  // Testing input validation.
+  public boolean isInputValid(String username, String password) {
+    return username != null && !username.isBlank()
+        && password != null && !password.isBlank();
+  }
 
   @FXML
   private TextField usernameField;
@@ -36,3 +41,4 @@ public class LoginController {
     messageLabel.setText("Register clicked");
   }
 }
+
