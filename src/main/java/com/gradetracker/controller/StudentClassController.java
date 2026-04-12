@@ -9,7 +9,7 @@ import javafx.scene.control.TableView;
  * Student class view controller to view assignments.
  *
  * @author Harvey Duran
- * @since TBD
+ * @since 04/24/26
  */
 public class StudentClassController {
 
