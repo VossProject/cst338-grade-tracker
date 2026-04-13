@@ -31,13 +31,13 @@
   <TextArea fx:id="descriptionField" promptText="Description"
     prefRowCount="3" />
 
-  <DatePicker fx:id="dueDatePicker" promptText="Due Date" />
+  <DatePicker fx:id="dueDatePicker" promptText="Due Date" maxWidth="Infinity" />
 
   <TextField fx:id="maxGradeField" promptText="Max Grade" />
 
   <HBox spacing="10.0" alignment="CENTER">
-    <Button text="Submit" onAction="#handleSubmit" />
     <Button text="Back" onAction="#handleBack" />
+    <Button text="Submit" onAction="#handleSubmit" styleClass="success" />
   </HBox>
 
   <Label fx:id="errorLabel" text="" style="-fx-text-fill: red;" />
