@@ -18,16 +18,14 @@ class CreateAssignmentControllerTest {
   // Testing plan item 1: valid assignment creation
   @Test
   void validAssignmentReturnsNull() {
-    String result = CreateAssignmentController.validate(
-        "Homework 1", "100", Collections.emptyList());
+    String result = CreateAssignmentController.validate("Homework 1", "100", Collections.emptyList());
     assertNull(result);
   }
 
   // Testing plan item 2a: no assignment title
   @Test
   void emptyTitleReturnsError() {
-    String result = CreateAssignmentController.validate(
-        "", "100", Collections.emptyList());
+    String result = CreateAssignmentController.validate("", "100", Collections.emptyList());
     assertEquals("Title is required.", result);
   }
 
