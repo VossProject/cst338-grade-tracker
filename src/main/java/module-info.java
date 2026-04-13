@@ -7,5 +7,7 @@ module com.gradetracker {
     requires java.sql;
 
     opens com.gradetracker to javafx.fxml;
+    opens com.gradetracker.controller to javafx.fxml;
+    opens com.gradetracker.model to javafx.fxml;
     exports com.gradetracker;
 }
