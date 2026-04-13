@@ -34,7 +34,9 @@ public class CreateAssignmentController {
   @FXML
   private Label errorLabel;
 
+  // TODO: swap to SqliteAssignmentDao once database layer is ready
   private AssignmentDao dao = new InMemoryAssignmentDao();
+  // TODO: pass classId from class view once navigation supports data passing
   private int classId = 1;
 
   /**
