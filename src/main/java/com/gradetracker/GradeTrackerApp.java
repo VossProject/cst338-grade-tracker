@@ -1,10 +1,8 @@
 package com.gradetracker;
 
 import atlantafx.base.theme.Dracula;
+import com.gradetracker.manager.SceneManager;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -19,13 +17,10 @@ public class GradeTrackerApp extends Application {
   public void start(Stage stage) {
     Application.setUserAgentStylesheet(new Dracula().getUserAgentStylesheet());
 
-    Label label = new Label("Grade Tracker");
-    StackPane root = new StackPane(label);
-    Scene scene = new Scene(root, 800, 600);
-
-    stage.setTitle("Grade Tracker");
-    stage.setScene(scene);
-    stage.show();
+    // TODO: change to login.fxml once login scene is wired up
+    SceneManager sceneManager = new SceneManager(stage);
+    sceneManager.switchScene("/fxml/create-assignment.fxml",
+        "Create Assignment");
   }
 
   public static void main(String[] args) {
