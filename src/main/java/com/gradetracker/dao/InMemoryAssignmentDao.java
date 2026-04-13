@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * In-memory implementation of AssignmentDao for testing.
+ * TODO: replace with SqliteAssignmentDao once database layer is set up
  *
  * @author Mikey Voss
  * @since 2026-04-12
