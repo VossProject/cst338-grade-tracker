@@ -47,8 +47,7 @@ public class CreateAssignmentController {
    * @param existing assignments already in this class
    * @return error message if invalid, null if valid
    */
-  static String validate(String title, String maxGradeText,
-      List<Assignment> existing) {
+  static String validate(String title, String maxGradeText, List<Assignment> existing) {
     if (title == null || title.isBlank()) {
       return "Title is required.";
     }
@@ -87,8 +86,7 @@ public class CreateAssignmentController {
     String description = descriptionField.getText();
     LocalDate dueDate = dueDatePicker.getValue();
 
-    Assignment assignment = new Assignment(
-        title, description, dueDate, maxGrade, classId);
+    Assignment assignment = new Assignment(title, description, dueDate, maxGrade, classId);
     dao.save(assignment);
     errorLabel.setText("Assignment created.");
   }
