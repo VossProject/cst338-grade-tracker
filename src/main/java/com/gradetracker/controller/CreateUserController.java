@@ -21,12 +21,6 @@ public class CreateUserController {
     private TextField usernameField;
 
     @FXML
-    private TextField firstNameField;
-
-    @FXML
-    private TextField lastNameField;
-
-    @FXML
     private ComboBox<String> roleComboBox;
 
     @FXML
@@ -69,8 +63,6 @@ public class CreateUserController {
      */
     static String validate(
             String username,
-            String firstName,
-            String lastName,
             String role,
             String password,
             String confirmPassword,
@@ -78,12 +70,6 @@ public class CreateUserController {
     ) {
         if (username == null || username.isBlank()) {
             return "Username is required.";
-        }
-        if (firstName == null || firstName.isBlank()) {
-            return "First name is required.";
-        }
-        if (lastName == null || lastName.isBlank()) {
-            return "Last name is required.";
         }
         if (role == null || role.isBlank()) {
             return "Role is required.";
@@ -111,16 +97,12 @@ public class CreateUserController {
     @FXML
     private void handleCreateUser() {
         String username = usernameField.getText().trim();
-        String firstName = firstNameField.getText().trim();
-        String lastName = lastNameField.getText().trim();
         String role = roleComboBox.getValue();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
         String error = validate(
                 username,
-                firstName,
-                lastName,
                 role,
                 password,
                 confirmPassword,
@@ -148,8 +130,6 @@ public class CreateUserController {
 
     private void clearForm() {
         usernameField.clear();
-        firstNameField.clear();
-        lastNameField.clear();
         roleComboBox.setValue(null);
         passwordField.clear();
         confirmPasswordField.clear();
