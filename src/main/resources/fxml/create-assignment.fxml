@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<!--
+
+@author Mikey Voss
+@since 2026-04-12
+-->
+<VBox alignment="TOP_CENTER" spacing="15.0"
+  xmlns="http://javafx.com/javafx/21"
+  xmlns:fx="http://javafx.com/fxml/1"
+  fx:controller="com.gradetracker.controller.CreateAssignmentController">
+
+  <padding>
+    <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+  </padding>
+
+  <Label text="Create Assignment"
+    style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+  <TextField fx:id="titleField" promptText="Assignment Title" />
+
+  <TextArea fx:id="descriptionField" promptText="Description"
+    prefRowCount="3" />
+
+  <DatePicker fx:id="dueDatePicker" promptText="Due Date" maxWidth="Infinity" />
+
+  <TextField fx:id="maxGradeField" promptText="Max Grade" />
+
+  <HBox spacing="10.0" alignment="CENTER">
+    <Button text="Back" onAction="#handleBack" />
+    <Button text="Submit" onAction="#handleSubmit" styleClass="success" />
+  </HBox>
+
+  <Label fx:id="errorLabel" text="" style="-fx-text-fill: red;" />
+
+</VBox>
