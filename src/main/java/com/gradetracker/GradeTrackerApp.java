@@ -19,7 +19,7 @@ public class GradeTrackerApp extends Application {
 
     // TODO: change to login.fxml once login scene is wired up
     SceneManager sceneManager = new SceneManager(stage);
-    sceneManager.switchScene("/fxml/create-user.fxml", "Create Assignment");
+    sceneManager.switchScene("/fxml/create-assignment.fxml", "Create Assignment");
   }
 
   public static void main(String[] args) {
