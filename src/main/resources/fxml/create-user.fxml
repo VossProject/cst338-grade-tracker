@@ -5,15 +5,49 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 <!--
 
 
 @author Robert Mozzetti
 @since 04/13/26
 -->
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox alignment="TOP_CENTER" spacing="20.0"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gradetracker.controller.CreateUserController"
+      styleClass="root">
 
-</AnchorPane>
+    <padding>
+        <Insets top="30.0" right="30.0" bottom="30.0" left="30.0"/>
+    </padding>
+
+    <!-- Title -->
+    <Label text="Create User" styleClass="title-2" />
+
+    <!-- Card container -->
+    <VBox spacing="12.0" maxWidth="350.0" styleClass="card">
+
+        <TextField fx:id="usernameField" promptText="Username" />
+        <TextField fx:id="firstNameField" promptText="First Name" />
+        <TextField fx:id="lastNameField" promptText="Last Name" />
+
+        <ComboBox fx:id="roleComboBox" promptText="Select Role" />
+
+        <PasswordField fx:id="passwordField" promptText="Password" />
+        <PasswordField fx:id="confirmPasswordField" promptText="Confirm Password" />
+
+        <!-- Buttons -->
+        <HBox spacing="10.0" alignment="CENTER_RIGHT">
+            <Button text="Back" onAction="#handleBack" />
+            <Button text="Create User"
+                    onAction="#handleCreateUser"
+                    styleClass="accent" />
+        </HBox>
+
+        <!-- Message -->
+        <Label fx:id="messageLabel" text="" styleClass="text-muted" />
+
+    </VBox>
+
+</VBox>
