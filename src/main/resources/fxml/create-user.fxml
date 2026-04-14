@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
@@ -12,7 +8,7 @@
 @author Robert Mozzetti
 @since 04/13/26
 -->
-<VBox alignment="TOP_CENTER" spacing="15.0" prefWidth="500.0"
+<VBox alignment="TOP_CENTER" spacing="15.0" maxWidth="Infinity"
       xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.gradetracker.controller.CreateUserController">
@@ -24,7 +20,7 @@
     <Label text="Create User"
            style="-fx-font-size: 18px; -fx-font-weight: bold;" />
 
-    <TextField fx:id="usernameField" promptText="Username" />
+    <TextField fx:id="usernameField" promptText="Username"/>
     <TextField fx:id="firstNameField" promptText="First Name" />
     <TextField fx:id="lastNameField" promptText="Last Name" />
     <ComboBox fx:id="roleComboBox" promptText="Select Role" />
