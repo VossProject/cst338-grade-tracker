@@ -12,58 +12,25 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  */
 class CreateUserControllerTest {
 
+    //Tests for valid user creation with a new username, password, and by selecting a role
     @Test
     void testValidUserCreation() {
-        String result = CreateUserController.validate(
-                "newstudent1",
-                "Robert",
-                "Mozzetti",
-                "Student",
-                "password123",
-                "password123",
-                Collections.emptySet()
-        );
-
+        String result = CreateUserController.validate("rmozzetti","Student","password123","password123",Collections.emptySet());
         assertNull(result);
     }
 
+    //Tests for failed user creation by using a duplicate username
     @Test
     void testDuplicateUsername() {
-        String result = CreateUserController.validate(
-                "admin",
-                "Robert",
-                "Mozzetti",
-                "Admin",
-                "password123",
-                "password123",
-                Set.of("admin", "teacher1")
-        );
-
+        String result = CreateUserController.validate("admin","Admin","password123","password123",Set.of("admin", "teacher1"));
         assertEquals("That username is already taken.", result);
     }
 
+    //Tests for creating 2 users with different usernames but identical passwords (This should not return an error)
     @Test
     void testTwoUsersIdenticalPasswords() {
-        String firstResult = CreateUserController.validate(
-                "student1",
-                "Robert",
-                "Mozzetti",
-                "Student",
-                "samepassword123",
-                "samepassword123",
-                Collections.emptySet()
-        );
-
-        String secondResult = CreateUserController.validate(
-                "student2",
-                "Olga",
-                "Bradford",
-                "Student",
-                "samepassword123",
-                "samepassword123",
-                Set.of("student1")
-        );
-
+        String firstResult = CreateUserController.validate("robert", "Student", "samepassword123","samepassword123",Collections.emptySet());
+        String secondResult = CreateUserController.validate("harvey","Student","samepassword123","samepassword123",Set.of("robert"));
         assertNull(firstResult);
         assertNull(secondResult);
     }
