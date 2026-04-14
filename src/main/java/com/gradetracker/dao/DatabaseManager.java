@@ -72,7 +72,7 @@ public class DatabaseManager {
             CREATE TABLE IF NOT EXISTS users (
                 userId INTEGER PRIMARY KEY AUTOINCREMENT,
                 userName TEXT NOT NULL UNIQUE,
-                password TEXT NOT NULL UNIQUE,
+                password TEXT NOT NULL,
                 roleId INTEGER NOT NULL,
                 FOREIGN KEY (roleId) REFERENCES roles(roleId) ON DELETE CASCADE
             );
