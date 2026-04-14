@@ -21,7 +21,7 @@ public class CreateUserController {
     private TextField usernameField;
 
     @FXML
-    private ComboBox<String> roleComboBox;
+    private ComboBox<Role> roleComboBox;
 
     @FXML
     private PasswordField passwordField;
@@ -38,9 +38,9 @@ public class CreateUserController {
     @FXML
     private void initialize() {
         roleComboBox.setItems(FXCollections.observableArrayList(
-                "Admin",
-                "Teacher",
-                "Student"
+                new Role(1,"Admin"),
+                new Role(2,"Teacher"),
+                new Role(3,"Student")
         ));
 
         existingUsernames.add("admin");
@@ -63,7 +63,7 @@ public class CreateUserController {
      */
     static String validate(
             String username,
-            String role,
+            Integer roleId,
             String password,
             String confirmPassword,
             Set<String> existing
@@ -71,7 +71,7 @@ public class CreateUserController {
         if (username == null || username.isBlank()) {
             return "Username is required.";
         }
-        if (role == null || role.isBlank()) {
+        if (roleId == null) {
             return "Role is required.";
         }
         if (password == null || password.isBlank()) {
@@ -97,13 +97,14 @@ public class CreateUserController {
     @FXML
     private void handleCreateUser() {
         String username = usernameField.getText().trim();
-        String role = roleComboBox.getValue();
+        Role role = roleComboBox.getValue();
+        Integer roleId = role == null ? null : role.getRoleId();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
         String error = validate(
                 username,
-                role,
+                roleId,
                 password,
                 confirmPassword,
                 existingUsernames
