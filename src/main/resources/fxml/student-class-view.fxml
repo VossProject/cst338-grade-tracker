@@ -31,7 +31,7 @@
     <Button text="Logout" onAction="#handleLogout" />
   </HBox>
 
-  <TableView fx:id="assignmentTable" prefWidth="600.0">
+  <TableView fx:id="assignmentTable" prefWidth="450.0">
     <columns>
       <TableColumn fx:id="titleColumn" text="Assignment Title" prefWidth="200.0" />
       <TableColumn fx:id="dueDateColumn" text="Due Date" prefWidth="150.0" />
