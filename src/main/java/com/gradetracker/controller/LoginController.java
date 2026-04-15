@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
  * Controller for the login scene.
  *
  * @author Harvey Duran
- * @since TBD
+ * @since 04/24/26
  */
 public class LoginController {
 
