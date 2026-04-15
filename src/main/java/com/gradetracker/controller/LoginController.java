@@ -67,12 +67,17 @@ public class LoginController {
     String role = user.getRoleName();
 
     if ("Admin".equalsIgnoreCase(role)) {
+      // TODO: Update to correct dashboard
       sceneManager.switchScene("/fxml/create-user.fxml", "Admin");
-    } else if ("Teacher".equalsIgnoreCase(role)) {
+    }
+    else if ("Teacher".equalsIgnoreCase(role)) {
       sceneManager.switchScene("/fxml/create-assignment.fxml", "Teacher");
-    } else if ("Student".equalsIgnoreCase(role)) {
-      sceneManager.switchScene("/fxml/student-class-view.fxml", "Student");
-    } else {
+    }
+    else if ("Student".equalsIgnoreCase(role)) {
+      sceneManager.switchScene("/fxml/student-class-view.fxml", "Student",
+          800, 600);
+    }
+    else {
       messageLabel.setText("Unknown user role.");
     }
   }
