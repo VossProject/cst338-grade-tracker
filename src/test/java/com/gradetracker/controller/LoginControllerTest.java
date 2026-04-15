@@ -4,6 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Testing for login scene.
+ *
+ * @author Harvey Duran
+ * @since 04/24/26
+ */
 class LoginControllerTest {
 
   @Test
