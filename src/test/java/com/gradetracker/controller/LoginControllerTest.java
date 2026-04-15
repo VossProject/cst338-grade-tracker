@@ -1,42 +1,47 @@
 package com.gradetracker.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
- * Testing for login scene.
+ * Unit tests for LoginController validation.
  *
  * @author Harvey Duran
- * @since 04/24/26
+ * @since TBD
  */
 class LoginControllerTest {
 
-  @Test
-  void testValidInput() {
-    LoginController controller = new LoginController();
+  private LoginController controller;
 
-    assertTrue(controller.isInputValid("user", "pass"));
+  @BeforeEach
+  void setUp() {
+    controller = new LoginController();
   }
 
   @Test
-  void testEmptyUsername() {
-    LoginController controller = new LoginController();
-
-    assertFalse(controller.isInputValid("", "pass"));
+  void validInputReturnsNull() {
+    String result = controller.validate("user", "pass");
+    assertNull(result);
   }
 
   @Test
-  void testEmptyPassword() {
-    LoginController controller = new LoginController();
-
-    assertFalse(controller.isInputValid("user", ""));
+  void emptyUsernameReturnsError() {
+    String result = controller.validate("", "pass");
+    assertEquals("Username is required.", result);
   }
 
   @Test
-  void testBothEmpty() {
-    LoginController controller = new LoginController();
+  void emptyPasswordReturnsError() {
+    String result = controller.validate("user", "");
+    assertEquals("Password is required.", result);
+  }
 
-    assertFalse(controller.isInputValid("", ""));
+  @Test
+  void bothEmptyReturnsUsernameError() {
+    String result = controller.validate("", "");
+    assertEquals("Username is required.", result);
   }
 }

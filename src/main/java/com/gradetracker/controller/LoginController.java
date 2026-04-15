@@ -6,17 +6,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 /**
- * Login controller for application.
+ * Controller for the login scene.
  *
  * @author Harvey Duran
- * @since 04/24/26
+ * @since TBD
  */
 public class LoginController {
-  // Testing input validation.
-  public boolean isInputValid(String username, String password) {
-    return username != null && !username.isBlank()
-        && password != null && !password.isBlank();
-  }
 
   @FXML
   private TextField usernameField;
@@ -27,18 +22,51 @@ public class LoginController {
   @FXML
   private Label messageLabel;
 
+  /**
+   * Validates login input fields.
+   *
+   * @param username the entered username
+   * @param password the entered password
+   * @return an error message if input is invalid, otherwise null
+   */
+  public String validate(String username, String password) {
+    if (username == null || username.isBlank()) {
+      return "Username is required.";
+    }
+    if (password == null || password.isBlank()) {
+      return "Password is required.";
+    }
+    return null;
+  }
+
+  /**
+   * Handles login button click.
+   */
   @FXML
   private void handleLogin() {
-    // TODO: Validate username/password with database
-    // TODO: Determine user role (admin, teacher, student)
-    // TODO: Use SceneManager to navigate to dashboard
-    messageLabel.setText("Login clicked");
+    String username = usernameField.getText();
+    String password = passwordField.getText();
+
+    String error = validate(username, password);
+    if (error != null) {
+      messageLabel.setText(error);
+      return;
+    }
+
+    // TODO: Connect to UserDao/authentication logic
+    // TODO: Verify credentials against database
+    // TODO: Determine user role
+    // TODO: Use SceneManager to navigate to correct dashboard
+
+    messageLabel.setText("Login logic not connected yet.");
   }
 
+  /**
+   * Handles register button click.
+   */
   @FXML
   private void handleRegister() {
-    // TODO: Implement user registration logic
-    messageLabel.setText("Register clicked");
+    // TODO: Implement registration flow or navigate to registration scene
+    messageLabel.setText("Register clicked.");
   }
 }
-
