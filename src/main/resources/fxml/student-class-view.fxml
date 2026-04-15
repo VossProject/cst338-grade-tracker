@@ -41,4 +41,6 @@
     </columns>
   </TableView>
 
+  <Label fx:id="totalPointsLabel" text="Total Points: 0 / 0" />
+
 </VBox>

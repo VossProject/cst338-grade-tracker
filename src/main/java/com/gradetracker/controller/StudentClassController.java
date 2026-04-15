@@ -65,6 +65,26 @@ public class StudentClassController {
 
     loadSampleAssignments();
     assignmentTable.getItems().setAll(assignmentDao.findByClassId(1));
+
+    assignmentTable.getItems().setAll(assignmentDao.findByClassId(1));
+    updateTotalPoints();
+  }
+
+  @FXML
+  private Label totalPointsLabel;
+
+  private void updateTotalPoints() {
+    int totalPossible = 0;
+    int totalEarned = 0;
+
+    for (Assignment assignment : assignmentTable.getItems()) {
+      totalPossible += assignment.getMaxGrade();
+
+      // Temporary mock score: pretend student earned 80% on each assignment
+      totalEarned += (int) (assignment.getMaxGrade() * 0.8);
+    }
+
+    totalPointsLabel.setText("Total Points: " + totalEarned + " / " + totalPossible);
   }
 
   private void loadSampleAssignments() {
