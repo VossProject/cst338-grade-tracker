@@ -1,8 +1,3 @@
-/**
- * @author Robert Mozzetti
- * created: 4/13/2026
- * Explanation: Controller for the create user form
- */
 package com.gradetracker.controller;
 
 import javafx.collections.FXCollections;
@@ -14,6 +9,12 @@ import javafx.scene.control.Label;
 
 import java.util.HashSet;
 import java.util.Set;
+
+/**
+ * @author Robert Mozzetti
+ * created: 4/13/2026
+ * Explanation: Controller for the create user form
+ */
 
 public class CreateUserController {
 
