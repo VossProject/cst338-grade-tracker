@@ -1,9 +1,14 @@
 package com.gradetracker.controller;
 
+import com.gradetracker.dao.InMemoryUserDao;
+import com.gradetracker.dao.UserDao;
+import com.gradetracker.manager.SceneManager;
+import com.gradetracker.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * Controller for the login scene.
@@ -12,6 +17,12 @@ import javafx.scene.control.TextField;
  * @since 04/24/26
  */
 public class LoginController {
+
+  private UserDao userDao = new InMemoryUserDao();
+
+  public void setUserDao(UserDao userDao) {
+    this.userDao = userDao;
+  }
 
   @FXML
   private TextField usernameField;
@@ -22,13 +33,6 @@ public class LoginController {
   @FXML
   private Label messageLabel;
 
-  /**
-   * Validates login input fields.
-   *
-   * @param username the entered username
-   * @param password the entered password
-   * @return an error message if input is invalid, otherwise null
-   */
   public String validate(String username, String password) {
     if (username == null || username.isBlank()) {
       return "Username is required.";
@@ -39,9 +43,6 @@ public class LoginController {
     return null;
   }
 
-  /**
-   * Handles login button click.
-   */
   @FXML
   private void handleLogin() {
     String username = usernameField.getText();
@@ -53,20 +54,26 @@ public class LoginController {
       return;
     }
 
-    // TODO: Connect to UserDao/authentication logic
-    // TODO: Verify credentials against database
-    // TODO: Determine user role
-    // TODO: Use SceneManager to navigate to correct dashboard
+    User user = userDao.authenticate(username, password);
 
-    messageLabel.setText("Login logic not connected yet.");
-  }
+    if (user == null) {
+      messageLabel.setText("Invalid username or password.");
+      return;
+    }
 
-  /**
-   * Handles register button click.
-   */
-  @FXML
-  private void handleRegister() {
-    // TODO: Implement registration flow or navigate to registration scene
-    messageLabel.setText("Register clicked.");
+    Stage stage = (Stage) usernameField.getScene().getWindow();
+    SceneManager sceneManager = new SceneManager(stage);
+
+    String role = user.getRoleName();
+
+    if ("Admin".equalsIgnoreCase(role)) {
+      sceneManager.switchScene("/fxml/create-user.fxml", "Admin");
+    } else if ("Teacher".equalsIgnoreCase(role)) {
+      sceneManager.switchScene("/fxml/create-assignment.fxml", "Teacher");
+    } else if ("Student".equalsIgnoreCase(role)) {
+      sceneManager.switchScene("/fxml/student-class-view.fxml", "Student");
+    } else {
+      messageLabel.setText("Unknown user role.");
+    }
   }
 }

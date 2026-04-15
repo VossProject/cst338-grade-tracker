@@ -31,7 +31,7 @@ public class SceneManager {
       stage.setTitle(title);
       stage.show();
     } catch (IOException e) {
-      e.printStackTrace();
+      throw new RuntimeException("Failed to load scene: " + fxmlFile, e);
     }
   }
 }
