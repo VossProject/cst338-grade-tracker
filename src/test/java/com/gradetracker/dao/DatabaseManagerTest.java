@@ -47,8 +47,8 @@ class DatabaseManagerTest {
     try (Connection connection = manager.getConnection();
          Statement statement = connection.createStatement();
          ResultSet res = statement.executeQuery(roles)) {
-          assertTrue(res.next());
-          assertEquals(3, res.getInt(1), "There should be 3 roles (Admin, Teacher, and Student)");
+      assertTrue(res.next());
+      assertEquals(3, res.getInt(1), "There should be 3 roles");
     }
   }
 
@@ -58,9 +58,9 @@ class DatabaseManagerTest {
     try (Connection connection = manager.getConnection();
          Statement statement = connection.createStatement();
          ResultSet res = statement.executeQuery(admins)) {
-          assertTrue(res.next(), "A user with roleId = 1 should exist");
-          int userId = res.getInt("userId");
-          assertTrue(userId > 0);
+      assertTrue(res.next(), "A user with roleId = 1 should exist");
+      int userId = res.getInt("userId");
+      assertTrue(userId > 0);
     }
   }
 }
