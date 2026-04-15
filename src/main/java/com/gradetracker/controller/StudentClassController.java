@@ -22,6 +22,12 @@ import javafx.stage.Stage;
  */
 public class StudentClassController {
 
+  public static final double DEFAULT_WIDTH = 500;
+  public static final double DEFAULT_HEIGHT = 450;
+
+  public static final double TABLE_WIDTH = 800;
+  public static final double TABLE_HEIGHT = 600;
+
   private final AssignmentDao assignmentDao = new InMemoryAssignmentDao();
 
   @FXML
