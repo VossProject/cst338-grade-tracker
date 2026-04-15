@@ -29,7 +29,7 @@
 
   <PasswordField fx:id="passwordField" promptText="Password" />
 
-  <Button text="Login" onAction="#handleLogin"
+  <Button text="Login" onAction="#handleLogin" defaultButton="true"
     style="-fx-background-color: #76D86D; -fx-text-fill: black;"/>
 
   <Label fx:id="messageLabel" text=""

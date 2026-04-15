@@ -47,6 +47,7 @@ public class StudentClassController {
 
   @FXML
   public void initialize() {
+    assignmentTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     classTitleLabel.setText("CST 338 - Software Design");
     classDescriptionLabel.setText("Current assignments for this class");
 

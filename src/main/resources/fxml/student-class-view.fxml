@@ -28,7 +28,8 @@
 
   <HBox spacing="10.0">
     <Button text="Back" onAction="#handleBack" />
-    <Button text="Logout" onAction="#handleLogout" />
+    <Button text="Logout" onAction="#handleLogout"
+      style="-fx-background-color: #FF9580; -fx-text-fill: black;"/>
   </HBox>
 
   <TableView fx:id="assignmentTable" prefWidth="450.0">
