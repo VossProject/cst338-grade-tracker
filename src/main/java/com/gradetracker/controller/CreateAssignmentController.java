@@ -1,7 +1,7 @@
 package com.gradetracker.controller;
 
 import com.gradetracker.dao.AssignmentDao;
-import com.gradetracker.dao.InMemoryAssignmentDao;
+import com.gradetracker.dao.SqliteAssignmentDao;
 import com.gradetracker.model.Assignment;
 import java.time.LocalDate;
 import java.util.List;
@@ -34,8 +34,7 @@ public class CreateAssignmentController {
   @FXML
   private Label errorLabel;
 
-  // TODO: swap to SqliteAssignmentDao once database layer is ready
-  private AssignmentDao dao = new InMemoryAssignmentDao();
+  private AssignmentDao dao = new SqliteAssignmentDao();
   // TODO: pass classId from class view once navigation supports data passing
   private int classId = 1;
 
@@ -55,7 +54,7 @@ public class CreateAssignmentController {
       return "Max grade is required.";
     }
     try {
-      int maxGrade = Integer.parseInt(maxGradeText);
+      double maxGrade = Double.parseDouble(maxGradeText);
       if (maxGrade <= 0) {
         return "Max grade must be positive.";
       }
@@ -78,16 +77,18 @@ public class CreateAssignmentController {
 
     String error = validate(title, maxGradeText, existing);
     if (error != null) {
+      errorLabel.setStyle("-fx-text-fill: red;");
       errorLabel.setText(error);
       return;
     }
 
-    int maxGrade = Integer.parseInt(maxGradeText);
+    double maxGrade = Double.parseDouble(maxGradeText);
     String description = descriptionField.getText();
     LocalDate dueDate = dueDatePicker.getValue();
 
     Assignment assignment = new Assignment(title, description, dueDate, maxGrade, classId);
     dao.save(assignment);
+    errorLabel.setStyle("-fx-text-fill: green;");
     errorLabel.setText("Assignment created.");
   }
 

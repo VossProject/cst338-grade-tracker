@@ -40,6 +40,6 @@
     <Button text="Submit" onAction="#handleSubmit" styleClass="success" />
   </HBox>
 
-  <Label fx:id="errorLabel" text="" style="-fx-text-fill: red;" />
+  <Label fx:id="errorLabel" text="" />
 
 </VBox>
