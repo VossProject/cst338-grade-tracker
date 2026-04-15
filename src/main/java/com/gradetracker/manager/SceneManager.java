@@ -30,8 +30,7 @@ public class SceneManager {
       stage.setScene(scene);
       stage.setTitle(title);
       stage.show();
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
   }
