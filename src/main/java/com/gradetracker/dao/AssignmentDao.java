@@ -25,4 +25,18 @@ public interface AssignmentDao {
    * @return list of assignments in that class
    */
   List<Assignment> findByClassId(int classId);
+
+  /**
+   * Updates an existing assignment.
+   *
+   * @param assignment the assignment with updated fields
+   */
+  void update(Assignment assignment);
+
+  /**
+   * Deletes an assignment by its id.
+   *
+   * @param assignmentId the id of the assignment to delete
+   */
+  void delete(int assignmentId);
 }

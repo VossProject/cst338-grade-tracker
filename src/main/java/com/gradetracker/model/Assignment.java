@@ -14,7 +14,7 @@ public class Assignment {
   private String title;
   private String description;
   private LocalDate dueDate;
-  private int maxGrade;
+  private double maxGrade;
   private int classId;
 
   /**
@@ -26,7 +26,8 @@ public class Assignment {
    * @param maxGrade maximum grade possible
    * @param classId id of the class this assignment belongs to
    */
-  public Assignment(String title, String description, LocalDate dueDate, int maxGrade, int classId) {
+  public Assignment(String title, String description, LocalDate dueDate,
+      double maxGrade, int classId) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -54,7 +55,7 @@ public class Assignment {
     return dueDate;
   }
 
-  public int getMaxGrade() {
+  public double getMaxGrade() {
     return maxGrade;
   }
 
