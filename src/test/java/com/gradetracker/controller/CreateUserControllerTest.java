@@ -9,7 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
- * Unit tests for CreateUserController validation.
+ * @author Robert Mozzetti
+ * created: 4/13/2026
+ * Explanation: Unit tests for CreateUserController validation
  */
 class CreateUserControllerTest {
 
