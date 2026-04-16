@@ -1,33 +1,47 @@
 package com.gradetracker.controller;
 
+import com.gradetracker.dao.InMemoryUserDao;
+import com.gradetracker.dao.UserDao;
+import com.gradetracker.manager.SceneManager;
+import com.gradetracker.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * Controller for the login scene.
  *
  * @author Harvey Duran
- * @since TBD
+ * @since 04/24/26
  */
 public class LoginController {
 
+  private UserDao userDao = new InMemoryUserDao();
+
+  public void setUserDao(UserDao userDao) {
+    this.userDao = userDao;
+  }
+
+  /** Text field for entering the username. */
   @FXML
   private TextField usernameField;
 
+  /** Password field for entering the password. */
   @FXML
   private PasswordField passwordField;
 
+  /** Label used to display validation or login error messages. */
   @FXML
   private Label messageLabel;
 
   /**
-   * Validates login input fields.
+   * Validates the username and password fields.
    *
-   * @param username the entered username
-   * @param password the entered password
-   * @return an error message if input is invalid, otherwise null
+   * @param username the username entered by the user
+   * @param password the password entered by the user
+   * @return an error message if validation fails, otherwise null
    */
   public String validate(String username, String password) {
     if (username == null || username.isBlank()) {
@@ -40,7 +54,10 @@ public class LoginController {
   }
 
   /**
-   * Handles login button click.
+   * Handles the login button action.
+   * Validates user input, attempts authentication through the UserDao,
+   * and switches scenes based on the user's role if successful.
+   * Displays an error message if authentication fails.
    */
   @FXML
   private void handleLogin() {
@@ -53,20 +70,27 @@ public class LoginController {
       return;
     }
 
-    // TODO: Connect to UserDao/authentication logic
-    // TODO: Verify credentials against database
-    // TODO: Determine user role
-    // TODO: Use SceneManager to navigate to correct dashboard
+    User user = userDao.authenticate(username, password);
 
-    messageLabel.setText("Login logic not connected yet.");
-  }
+    if (user == null) {
+      messageLabel.setText("Invalid username or password.");
+      return;
+    }
 
-  /**
-   * Handles register button click.
-   */
-  @FXML
-  private void handleRegister() {
-    // TODO: Implement registration flow or navigate to registration scene
-    messageLabel.setText("Register clicked.");
+    Stage stage = (Stage) usernameField.getScene().getWindow();
+    SceneManager sceneManager = new SceneManager(stage);
+
+    String role = user.getRoleName();
+
+    // TODO: Need to update to correct dashboard after login
+    if ("Admin".equalsIgnoreCase(role)) {
+      sceneManager.switchScene("/fxml/create-user.fxml", "Admin");
+    } else if ("Teacher".equalsIgnoreCase(role)) {
+      sceneManager.switchScene("/fxml/create-assignment.fxml", "Teacher");
+    } else if ("Student".equalsIgnoreCase(role)) {
+      sceneManager.switchScene("/fxml/student-class-view.fxml", "Student");
+    } else {
+      messageLabel.setText("Unknown user role.");
+    }
   }
 }
