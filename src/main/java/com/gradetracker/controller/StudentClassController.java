@@ -70,7 +70,20 @@ public class StudentClassController {
   @FXML
   private Label totalPointsLabel;
 
+  static String buildTotalPointsText(Iterable<Assignment> assignments) {
+    int totalPossible = 0;
+    int totalEarned = 0;
+
+    for (Assignment assignment : assignments) {
+      totalPossible += (int) assignment.getMaxGrade();
+      totalEarned += (int) (assignment.getMaxGrade() * 0.8); // temporary mock score
+    }
+
+    return "Total Points: " + totalEarned + " / " + totalPossible;
+  }
+
   private void updateTotalPoints() {
+    totalPointsLabel.setText(buildTotalPointsText(assignmentTable.getItems()));
     int totalPossible = 0;
     int totalEarned = 0;
 
