@@ -58,7 +58,7 @@ public class StudentClassController {
         new SimpleObjectProperty<>(cellData.getValue().getDueDate()));
 
     scoreColumn.setCellValueFactory(cellData ->
-        new SimpleStringProperty("N/A"));
+        new SimpleStringProperty("Not Graded"));
 
     maxGradeColumn.setCellValueFactory(cellData ->
         new SimpleIntegerProperty((int) cellData.getValue().getMaxGrade()).asObject());
