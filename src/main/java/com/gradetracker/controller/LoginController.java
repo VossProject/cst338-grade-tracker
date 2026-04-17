@@ -24,15 +24,25 @@ public class LoginController {
     this.userDao = userDao;
   }
 
+  /** Text field for entering the username. */
   @FXML
   private TextField usernameField;
 
+  /** Password field for entering the password. */
   @FXML
   private PasswordField passwordField;
 
+  /** Label used to display validation or login error messages. */
   @FXML
   private Label messageLabel;
 
+  /**
+   * Validates the username and password fields.
+   *
+   * @param username the username entered by the user
+   * @param password the password entered by the user
+   * @return an error message if validation fails, otherwise null
+   */
   public String validate(String username, String password) {
     if (username == null || username.isBlank()) {
       return "Username is required.";
@@ -43,6 +53,12 @@ public class LoginController {
     return null;
   }
 
+  /**
+   * Handles the login button action.
+   * Validates user input, attempts authentication through the UserDao,
+   * and switches scenes based on the user's role if successful.
+   * Displays an error message if authentication fails.
+   */
   @FXML
   private void handleLogin() {
     String username = usernameField.getText();
@@ -66,6 +82,7 @@ public class LoginController {
 
     String role = user.getRoleName();
 
+    // TODO: Need to update to correct dashboard after login
     if ("Admin".equalsIgnoreCase(role)) {
       // TODO: Update to correct dashboard
       sceneManager.switchScene("/fxml/create-user.fxml", "Admin");
