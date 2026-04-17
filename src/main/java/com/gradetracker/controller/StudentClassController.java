@@ -1,7 +1,7 @@
 package com.gradetracker.controller;
 
 import com.gradetracker.dao.AssignmentDao;
-import com.gradetracker.dao.InMemoryAssignmentDao;
+import com.gradetracker.dao.SqliteAssignmentDao;
 import com.gradetracker.manager.SceneManager;
 import com.gradetracker.model.Assignment;
 import java.time.LocalDate;
@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  */
 public class StudentClassController {
 
-  private final AssignmentDao assignmentDao = new InMemoryAssignmentDao();
+  private final AssignmentDao assignmentDao = new SqliteAssignmentDao();
 
   @FXML
   private Label classTitleLabel;
@@ -61,10 +61,7 @@ public class StudentClassController {
         new SimpleStringProperty("N/A"));
 
     maxGradeColumn.setCellValueFactory(cellData ->
-        new SimpleIntegerProperty(cellData.getValue().getMaxGrade()).asObject());
-
-    loadSampleAssignments();
-    assignmentTable.getItems().setAll(assignmentDao.findByClassId(1));
+        new SimpleIntegerProperty((int) cellData.getValue().getMaxGrade()).asObject());
 
     assignmentTable.getItems().setAll(assignmentDao.findByClassId(1));
     updateTotalPoints();
@@ -78,39 +75,13 @@ public class StudentClassController {
     int totalEarned = 0;
 
     for (Assignment assignment : assignmentTable.getItems()) {
-      totalPossible += assignment.getMaxGrade();
+      totalPossible += (int) assignment.getMaxGrade();
 
       // Temporary mock score: pretend student earned 80% on each assignment
       totalEarned += (int) (assignment.getMaxGrade() * 0.8);
     }
 
     totalPointsLabel.setText("Total Points: " + totalEarned + " / " + totalPossible);
-  }
-
-  private void loadSampleAssignments() {
-    assignmentDao.save(new Assignment(
-        "Homework 1",
-        "Intro to JavaFX",
-        LocalDate.of(2026, 4, 20),
-        100,
-        1
-    ));
-
-    assignmentDao.save(new Assignment(
-        "Quiz 1",
-        "Basic MVC concepts",
-        LocalDate.of(2026, 4, 25),
-        20,
-        1
-    ));
-
-    assignmentDao.save(new Assignment(
-        "Project Checkpoint",
-        "Login scene and controller progress",
-        LocalDate.of(2026, 5, 1),
-        50,
-        1
-    ));
   }
 
   @FXML
