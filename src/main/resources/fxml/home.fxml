@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import atlantafx.base.controls.Calendar?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.gradetracker.controller.HomeController"
+            prefHeight="400.0" prefWidth="600.0">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15.0" prefHeight="50.0"
+              style="-fx-background-color: -color-bg-inset;">
+            <!-- TODO: Insert username here -->
+            <Label text="Welcome, user!" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS" />
+        </HBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+            <FlowPane hgap="20.0" vgap="20.0" style="-fx-padding: 20;">
+                <!-- Card 1 -->
+                <Pane prefHeight="200.0" prefWidth="300.0">
+                    <children>
+                        <!-- The content area -->
+                        <VBox layoutX="10.0" layoutY="20.0" prefHeight="150.0" prefWidth="250.0" alignment="CENTER"
+                              style="-fx-background-color: -color-bg-default; -fx-border-color: -color-border-default; -fx-border-width: 1; -fx-padding: 30 15 15 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                            <children>
+                                <Label fx:id="quoteText" text="Fetching motivation..." wrapText="true"
+                                       style="-fx-font-size: 14px; -fx-text-fill: -color-fg-default; -fx-font-style: italic;" />
+                                <Label fx:id="quoteAuthor" text=""
+                                       style="-fx-font-size: 12px; -fx-text-fill: -color-fg-muted; -fx-font-weight: bold;" />
+
+                            </children>
+                        </VBox>
+                        <!-- The ribbon -->
+                        <Label layoutX="0.0" layoutY="30.0" text="QUOTE OF THE DAY"
+                               style="-fx-background-color: -color-accent-emphasis; -fx-text-fill: -color-fg-emphasis; -fx-padding: 5 15 5 15; -fx-font-weight: bold; -fx-font-size: 11px; -fx-background-radius: 0 5 5 0;" />
+                        <!-- The fold -->
+                        <Region layoutX="0.0" layoutY="56.0" prefHeight="8.0" prefWidth="10.0"
+                                style="-fx-background-color: -color-accent-fg; -fx-shape: 'M 0 0 L 10 0 L 10 10 Z';" />
+                    </children>
+                </Pane>
+                <!-- Card 2 -->
+                <Pane prefHeight="200.0" prefWidth="300.0">
+                    <children>
+                        <!-- The content area -->
+                        <VBox layoutX="10.0" layoutY="20.0" prefHeight="150.0" prefWidth="250.0"
+                              style="-fx-background-color: -color-bg-default; -fx-border-color: -color-border-default; -fx-border-width: 1;  -fx-padding: 30 15 15 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                            <children>
+                                <VBox spacing="2.0" alignment="CENTER">
+                                    <Label fx:id="timeLabel" text="00:00:00"
+                                           style="-fx-font-size: 40px; -fx-font-weight: bold;" />
+                                    <Label fx:id="dateLabel" text="Monday, January 1"
+                                           style="-fx-font-size: 20px; -fx-text-fill: -color-fg-muted;" />
+                                </VBox>
+                            </children>
+                        </VBox>
+                        <!-- The ribbon -->
+                        <Label layoutX="0.0" layoutY="30.0" text="CLOCK"
+                               style="-fx-background-color: -color-accent-emphasis; -fx-text-fill: -color-fg-emphasis; -fx-padding: 5 15 5 15; -fx-font-weight: bold; -fx-font-size: 11px; -fx-background-radius: 0 5 5 0;" />
+                        <!-- The fold -->
+                        <Region layoutX="0.0" layoutY="56.0" prefHeight="8.0" prefWidth="10.0"
+                                style="-fx-background-color: -color-accent-fg; -fx-shape: 'M 0 0 L 10 0 L 10 10 Z';" />
+                    </children>
+                </Pane>
+            </FlowPane>
+        </ScrollPane>
+    </center>
+</BorderPane>

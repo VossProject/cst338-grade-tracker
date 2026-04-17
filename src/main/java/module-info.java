@@ -5,8 +5,9 @@ module com.gradetracker {
     requires javafx.fxml;
     requires atlantafx.base;
     requires java.sql;
+    requires java.net.http;
 
-    opens com.gradetracker to javafx.fxml;
+  opens com.gradetracker to javafx.fxml;
     opens com.gradetracker.controller to javafx.fxml;
     opens com.gradetracker.model to javafx.fxml;
     // NOTE: new packages with @FXML fields need an opens line here
