@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane  xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.gradetracker.controller.DashboardController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15.0" prefHeight="50.0"
+              style="-fx-background-color: -color-accent-muted;">
+            <padding>
+                <Insets left="20.0" right="20.0" />
+            </padding>
+            <Label text="Otterware Grade Tracker" style="-fx-font-weight: bold; -fx-font-size: 20px;" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="Sign Out" styleClass="accent, borderless, rounded" maxWidth="Infinity" onAction="#signOut" style="-fx-font-weight: bold; -fx-text-fill: white;">
+            </Button>
+        </HBox>
+    </top>
+    <!-- sidebar menu -->
+    <left>
+        <VBox spacing="10.0" prefWidth="200.0" styleClass="sidebar">
+            <TreeView fx:id="navTree" showRoot="false" VBox.vgrow="ALWAYS" prefWidth="200.0" style="-fx-border-width: 0; -fx-background-color: -color-bg-inset;"/>
+        </VBox>
+    </left>
+    <!-- end of sidebar menu !-->
+    <center>
+        <StackPane fx:id="contentArea" style="-fx-background-color: -color-bg-inset; -fx-padding: 20;"/>
+    </center>
+</BorderPane>
