@@ -85,14 +85,13 @@ public class LoginController {
 
     // TODO: Need to update to correct dashboard after login
     if ("Admin".equalsIgnoreCase(role)) {
-      // TODO: Update to correct dashboard
-      sceneManager.switchScene("/fxml/create-user.fxml", "Admin");
+      sceneManager.switchScene("/fxml/dashboard.fxml", "Admin");
     }
     else if ("Teacher".equalsIgnoreCase(role)) {
-      sceneManager.switchScene("/fxml/create-assignment.fxml", "Teacher");
+      sceneManager.switchScene("/fxml/dashboard.fxml", "Teacher");
     }
     else if ("Student".equalsIgnoreCase(role)) {
-      sceneManager.switchScene("/fxml/student-class-view.fxml", "Student",
+      sceneManager.switchScene("/fxml/dashboard.fxml", "Student",
           800, 600);
     }
     else {

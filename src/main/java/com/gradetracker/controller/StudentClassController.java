@@ -47,6 +47,7 @@ public class StudentClassController {
 
   @FXML
   public void initialize() {
+    assignmentTable.setPlaceholder(new Label("No assignments available"));
     assignmentTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     classTitleLabel.setText("CST 338 - Software Design");
     classDescriptionLabel.setText("Current assignments for this class");
@@ -84,17 +85,6 @@ public class StudentClassController {
 
   private void updateTotalPoints() {
     totalPointsLabel.setText(buildTotalPointsText(assignmentTable.getItems()));
-    int totalPossible = 0;
-    int totalEarned = 0;
-
-    for (Assignment assignment : assignmentTable.getItems()) {
-      totalPossible += (int) assignment.getMaxGrade();
-
-      // Temporary mock score: pretend student earned 80% on each assignment
-      totalEarned += (int) (assignment.getMaxGrade() * 0.8);
-    }
-
-    totalPointsLabel.setText("Total Points: " + totalEarned + " / " + totalPossible);
   }
 
   @FXML
