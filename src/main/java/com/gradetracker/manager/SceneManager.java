@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.function.Consumer;
 
 /**
  * Handles scene switching for application.
@@ -22,9 +23,23 @@ public class SceneManager {
   }
 
   public void switchScene(String fxmlFile, String title) {
+    switchScene(fxmlFile, title, c -> {});
+  }
+
+  /**
+   * Switches scenes and lets the caller initialize the loaded controller
+   * before the scene is shown. Useful for passing data like a classId
+   * into the next scene.
+   *
+   * @param fxmlFile path to the FXML file
+   * @param title the window title
+   * @param controllerSetup receives the loaded controller
+   */
+  public void switchScene(String fxmlFile, String title, Consumer<Object> controllerSetup) {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
       Parent root = loader.load();
+      controllerSetup.accept(loader.getController());
 
       Scene scene = new Scene(root, 500, 450);
       stage.setScene(scene);
