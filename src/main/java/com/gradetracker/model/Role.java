@@ -1,4 +1,4 @@
-package com.gradetracker.controller;
+package com.gradetracker.model;
 
 /**
  * @author Robert Mozzetti
@@ -10,12 +10,12 @@ public class Role {
   private final int roleId;
   private final String roleName;
 
-  Role(int roleId, String roleName) {
+  public Role(int roleId, String roleName) {
     this.roleId = roleId;
     this.roleName = roleName;
   }
 
-  int getRoleId() {
+  public int getRoleId() {
     return roleId;
   }
 
