@@ -1,6 +1,13 @@
 package com.gradetracker.dao;
 
 import com.gradetracker.model.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +40,7 @@ public class InMemoryUserDao implements UserDao {
   @Override
   public User authenticate(String username, String password) {
     for (User user : users) {
-      if (user.getUsername().equalsIgnoreCase(username)
+      if (user.getUserName().equalsIgnoreCase(username)
           && user.getPassword().equals(password)) {
         return user;
       }
@@ -44,7 +51,7 @@ public class InMemoryUserDao implements UserDao {
   @Override
   public boolean usernameExists(String username) {
     for (User user : users) {
-      if (user.getUsername().equalsIgnoreCase(username)) {
+      if (user.getUserName().equalsIgnoreCase(username)) {
         return true;
       }
     }
@@ -55,4 +62,32 @@ public class InMemoryUserDao implements UserDao {
   public void save(User user) {
     users.add(user);
   }
+
+  @Override
+  public ObservableList<User> getAllUsers() {
+    ObservableList<User> users = FXCollections.observableArrayList();
+
+    String request = """
+        SELECT u.userId, u.userName, r.roleName 
+        FROM users u 
+        JOIN roles r ON u.roleId = r.roleId
+    """;
+
+    try (Connection connection = DatabaseManager.getInstance().getConnection();
+         Statement statement = connection.createStatement();
+         ResultSet response = statement.executeQuery(request)) {
+
+      while (response.next()) {
+        users.add(new User(
+            response.getInt("userId"),
+            response.getString("userName"),
+            response.getString("roleName")
+        ));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return users;
+  }
+
 }

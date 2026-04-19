@@ -1,6 +1,7 @@
 package com.gradetracker.dao;
 
 import com.gradetracker.model.User;
+import javafx.collections.ObservableList;
 
 /**
  * Data Access Object (DAO) interface for User objects.
@@ -24,4 +25,6 @@ public interface UserDao {
   boolean usernameExists(String username);
 
   void save(User user);
+
+  ObservableList<User> getAllUsers();
 }

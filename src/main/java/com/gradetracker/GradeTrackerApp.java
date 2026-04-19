@@ -25,13 +25,13 @@ public class GradeTrackerApp extends Application {
     Application.setUserAgentStylesheet(new Dracula().getUserAgentStylesheet());
 
     //Making the app automatically occupy 85% of the screen and centering it
-    Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-    double width = screenBounds.getWidth() * 0.85;
-    double height = screenBounds.getHeight() * 0.85;
+    Rectangle2D screen= Screen.getPrimary().getVisualBounds();
+    double width = screen.getWidth() * 0.85;
+    double height = screen.getHeight() * 0.85;
     stage.setWidth(width);
     stage.setHeight(height);
-    stage.setX((screenBounds.getWidth() - width) / 2);
-    stage.setY((screenBounds.getHeight() - height) / 2);
+    stage.setX((screen.getWidth() - width) / 2);
+    stage.setY((screen.getHeight() - height) / 2);
 
     // TODO: change to login.fxml once login scene is wired up
     SceneManager sceneManager = new SceneManager(stage);

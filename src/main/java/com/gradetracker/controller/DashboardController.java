@@ -40,8 +40,9 @@ public class DashboardController {
     root.getChildren().add(resources);
 
     //Resources sub-items
+    //TODO: implement navigation based on logged in user role
     resources.getChildren().add(new TreeItem<>(new NavItem("Classes", "/fxml/student-class-view.fxml")));
-    resources.getChildren().add(new TreeItem<>(new NavItem("Users", "/fxml/create-user.fxml")));
+    resources.getChildren().add(new TreeItem<>(new NavItem("Users", "/fxml/user-list.fxml")));
 
     navTree.setRoot(root);
 
