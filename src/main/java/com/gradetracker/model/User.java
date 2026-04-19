@@ -15,7 +15,6 @@ public class User {
   private String password;
   private int roleId;
   private String roleName;
-  private int roleId;
 
   public User(int userId, String username, String password, String roleName) {
     this.userId = userId;
@@ -68,9 +67,5 @@ public class User {
 
   public String getRoleName() {
     return roleName;
-  }
-
-  public int getRoleId() {
-    return roleId;
   }
 }

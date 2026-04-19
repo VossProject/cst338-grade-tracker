@@ -2,6 +2,7 @@ package com.gradetracker.controller;
 
 import com.gradetracker.dao.SqliteUserDao;
 import com.gradetracker.dao.UserDao;
+import com.gradetracker.model.Role;
 import com.gradetracker.model.User;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import com.gradetracker.model.Role;
 
 /**
  * @author Robert Mozzetti

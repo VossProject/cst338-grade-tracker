@@ -211,7 +211,7 @@ public class AssignmentViewController {
       Double existing = latestByStudent.get(student.getUserId());
       built.add(new StudentScoreRow(
           student.getUserId(),
-          student.getUsername(),
+          student.getUserName(),
           existing == null ? "" : String.valueOf(existing)
       ));
     }
