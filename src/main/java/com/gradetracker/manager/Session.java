@@ -1,5 +1,11 @@
 package com.gradetracker.manager;
 
+/**
+ *
+ *
+ * @author Harvey Duran
+ * @since 04/24/26
+ */
 public class Session {
   private static Integer userId;
   private static Integer roleId;
