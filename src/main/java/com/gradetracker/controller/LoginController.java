@@ -19,7 +19,6 @@ import javafx.stage.Stage;
  */
 public class LoginController {
 
-  // TODO: Import and update with correct SQL class
   private UserDao userDao = new SqliteUserDao();
 
   public void setUserDao(UserDao userDao) {
