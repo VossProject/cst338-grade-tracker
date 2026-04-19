@@ -119,12 +119,6 @@ public class CreateUserController {
     }
   }
 
-  @FXML
-  private void handleBack() {
-    // TODO: wire to SceneManager once admin dashboard routing is connected
-    setMessage("Back button clicked.", "text-muted");
-  }
-
   private void clearForm() {
     usernameField.clear();
     roleComboBox.setValue(null);
