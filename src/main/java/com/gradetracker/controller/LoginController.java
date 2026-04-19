@@ -78,24 +78,10 @@ public class LoginController {
       return;
     }
 
+    Session.startSession(user.getUserId(), user.getRoleId());
+
     Stage stage = (Stage) usernameField.getScene().getWindow();
     SceneManager sceneManager = new SceneManager(stage);
-
-    String role = user.getRoleName();
-
-    // TODO: Need to update to correct dashboard after login
-    if ("Admin".equalsIgnoreCase(role)) {
-      sceneManager.switchScene("/fxml/dashboard.fxml", "Admin");
-    }
-    else if ("Teacher".equalsIgnoreCase(role)) {
-      sceneManager.switchScene("/fxml/dashboard.fxml", "Teacher");
-    }
-    else if ("Student".equalsIgnoreCase(role)) {
-      sceneManager.switchScene("/fxml/dashboard.fxml", "Student",
-          800, 600);
-    }
-    else {
-      messageLabel.setText("Unknown user role.");
-    }
+    sceneManager.switchScene("/fxml/dashboard.fxml", "Dashboard");
   }
 }
