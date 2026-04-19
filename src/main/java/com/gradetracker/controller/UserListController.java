@@ -1,16 +1,14 @@
 package com.gradetracker.controller;
 
-import com.gradetracker.dao.InMemoryUserDao;
+import com.gradetracker.dao.SqliteUserDao;
 import com.gradetracker.dao.UserDao;
 import com.gradetracker.model.User;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -41,7 +39,7 @@ public class UserListController {
   @FXML
   private TableColumn<User, String> roleColumn;
 
-  private final UserDao userDao = new InMemoryUserDao();
+  private final UserDao userDao = new SqliteUserDao();
 
   /**
    * Initializing the list of users table
@@ -79,10 +77,9 @@ public class UserListController {
       double width = screen.getWidth() * 0.30;
       popup.setScene(new Scene(root, width, -1));
       popup.showAndWait();
+
       //Refreshing the table when popup closes
-      //might need to call initialize() instead
-      //TODO: check if the table is actually refreshing
-      getUserData();
+      initialize();
     } catch (IOException e) {
       e.printStackTrace();
     }

@@ -83,33 +83,6 @@ public class SqliteUserDao implements UserDao {
    *
    * @return a list of all users
    */
-  /*@Override
-  public List<User> getAllUsers() {
-    String sql = """
-      SELECT u.userId, u.userName, u.password, r.roleName
-      FROM users u
-      JOIN roles r ON r.roleId = u.roleId
-      ORDER BY u.userName
-      """;
-
-    List<User> results = new ArrayList<>();
-    try (Connection conn = DatabaseManager.getInstance().getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql);
-         ResultSet rs = stmt.executeQuery()) {
-      while (rs.next()) {
-        results.add(new User(
-            rs.getInt("userId"),
-            rs.getString("userName"),
-            rs.getString("password"),
-            rs.getString("roleName")
-        ));
-      }
-    } catch (SQLException e) {
-      throw new IllegalStateException("Failed to load users.", e);
-    }
-    return results;
-  }*/
-
   @Override
   public ObservableList<User> getAllUsers() {
     ObservableList<User> users = FXCollections.observableArrayList();

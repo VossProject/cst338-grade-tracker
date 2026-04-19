@@ -2,6 +2,9 @@ package com.gradetracker.dao;
 
 import com.gradetracker.model.ClassRecord;
 import com.gradetracker.model.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -171,5 +174,38 @@ public class SqliteClassDao implements ClassDao {
     }
 
     return results;
+  }
+
+  /**
+   * Returns all classes in the database.
+   *
+   * @return a list of all classes
+   */
+  @Override
+  public ObservableList<ClassRecord> getAllClasses() {
+    ObservableList<ClassRecord> classes = FXCollections.observableArrayList();
+
+    String request = """
+        SELECT c.classId, c.className, c.description, u.userName 
+        FROM classes c 
+        JOIN users u ON c.teacherId = u.userId
+    """;
+
+    try (Connection connection = DatabaseManager.getInstance().getConnection();
+         Statement statement = connection.createStatement();
+         ResultSet response = statement.executeQuery(request)) {
+
+      while (response.next()) {
+        classes.add(new ClassRecord(
+            response.getInt("classId"),
+            response.getString("className"),
+            response.getString("description"),
+            response.getString("userName")
+        ));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return classes;
   }
 }

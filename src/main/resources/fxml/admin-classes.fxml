@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane  xmlns="http://javafx.com/javafx"
+             xmlns:fx="http://javafx.com/fxml"
+             fx:controller="com.gradetracker.controller.AdminClassesController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15.0" prefHeight="50.0"
+              style="-fx-background-color: -color-bg-inset;">
+            <Label text="All Classes" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="Create Class" styleClass="accent, borderless, rounded" maxWidth="Infinity" onAction="#createClass" style="-fx-font-weight: bold; -fx-text-fill: white;"></Button>
+        </HBox>
+    </top>
+    <center>
+        <TableView fx:id="classTable">
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+            <columns>
+                <TableColumn fx:id="classIdColumn" text="ID #" prefWidth="100.0" minWidth="100.0" maxWidth="100.0"/>
+                <TableColumn fx:id="classNameColumn" text="Name"/>
+                <TableColumn fx:id="descriptionColumn" text="Description"/>
+                <TableColumn fx:id="teacherColumn" text="Teacher"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>
