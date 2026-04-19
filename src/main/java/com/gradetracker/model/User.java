@@ -13,6 +13,7 @@ public class User {
   private int userId;
   private String username;
   private String password;
+  private int roleId;
   private String roleName;
   private int roleId;
 
@@ -21,6 +22,16 @@ public class User {
     this.username = username;
     this.password = password;
     this.roleName = roleName;
+
+    if ("Admin".equalsIgnoreCase(roleName)) {
+      this.roleId = 1;
+    } else if ("Teacher".equalsIgnoreCase(roleName)) {
+      this.roleId = 2;
+    } else if ("Student".equalsIgnoreCase(roleName)) {
+      this.roleId = 3;
+    } else {
+      this.roleId = 0;
+    }
   }
 
   /**
@@ -49,6 +60,10 @@ public class User {
 
   public String getPassword() {
     return password;
+  }
+
+  public int getRoleId() {
+    return roleId;
   }
 
   public String getRoleName() {

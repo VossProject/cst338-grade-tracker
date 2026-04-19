@@ -1,8 +1,9 @@
 package com.gradetracker.controller;
 
-import com.gradetracker.dao.InMemoryUserDao;
+import com.gradetracker.dao.SqliteUserDao;
 import com.gradetracker.dao.UserDao;
 import com.gradetracker.manager.SceneManager;
+import com.gradetracker.manager.Session;
 import com.gradetracker.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -18,7 +19,8 @@ import javafx.stage.Stage;
  */
 public class LoginController {
 
-  private UserDao userDao = new InMemoryUserDao();
+  // TODO: Import and update with correct SQL class
+  private UserDao userDao = new SqliteUserDao();
 
   public void setUserDao(UserDao userDao) {
     this.userDao = userDao;
@@ -77,20 +79,10 @@ public class LoginController {
       return;
     }
 
+    Session.startSession(user.getUserId(), user.getRoleId());
+
     Stage stage = (Stage) usernameField.getScene().getWindow();
     SceneManager sceneManager = new SceneManager(stage);
-
-    String role = user.getRoleName();
-
-    // TODO: Need to update to correct dashboard after login
-    if ("Admin".equalsIgnoreCase(role)) {
-      sceneManager.switchScene("/fxml/create-user.fxml", "Admin");
-    } else if ("Teacher".equalsIgnoreCase(role)) {
-      sceneManager.switchScene("/fxml/create-assignment.fxml", "Teacher");
-    } else if ("Student".equalsIgnoreCase(role)) {
-      sceneManager.switchScene("/fxml/student-class-view.fxml", "Student");
-    } else {
-      messageLabel.setText("Unknown user role.");
-    }
+    sceneManager.switchScene("/fxml/dashboard.fxml", "Dashboard");
   }
 }

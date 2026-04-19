@@ -1,9 +1,18 @@
 package com.gradetracker.controller;
 
+import com.gradetracker.dao.AssignmentDao;
+import com.gradetracker.dao.SqliteAssignmentDao;
+import com.gradetracker.manager.SceneManager;
+import com.gradetracker.model.Assignment;
+import java.time.LocalDate;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 /**
  * Student class view controller to view assignments.
@@ -13,6 +22,8 @@ import javafx.scene.control.TableView;
  */
 public class StudentClassController {
 
+  private final AssignmentDao assignmentDao = new SqliteAssignmentDao();
+
   @FXML
   private Label classTitleLabel;
 
@@ -20,27 +31,74 @@ public class StudentClassController {
   private Label classDescriptionLabel;
 
   @FXML
-  private TableView<?> assignmentTable;
+  private TableView<Assignment> assignmentTable;
 
   @FXML
-  private TableColumn<?, ?> titleColumn;
+  private TableColumn<Assignment, String> titleColumn;
 
   @FXML
-  private TableColumn<?, ?> dueDateColumn;
+  private TableColumn<Assignment, LocalDate> dueDateColumn;
 
   @FXML
-  private TableColumn<?, ?> scoreColumn;
+  private TableColumn<Assignment, String> scoreColumn;
 
   @FXML
-  private TableColumn<?, ?> maxGradeColumn;
+  private TableColumn<Assignment, Integer> maxGradeColumn;
+
+  @FXML
+  public void initialize() {
+    assignmentTable.setPlaceholder(new Label("No assignments available"));
+    assignmentTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    classTitleLabel.setText("CST 338 - Software Design");
+    classDescriptionLabel.setText("Current assignments for this class");
+
+    titleColumn.setCellValueFactory(cellData ->
+        new SimpleStringProperty(cellData.getValue().getTitle()));
+
+    dueDateColumn.setCellValueFactory(cellData ->
+        new SimpleObjectProperty<>(cellData.getValue().getDueDate()));
+
+    scoreColumn.setCellValueFactory(cellData ->
+        new SimpleStringProperty("Not Graded"));
+
+    maxGradeColumn.setCellValueFactory(cellData ->
+        new SimpleIntegerProperty((int) cellData.getValue().getMaxGrade()).asObject());
+
+    assignmentTable.getItems().setAll(assignmentDao.findByClassId(1));
+    updateTotalPoints();
+  }
+
+  @FXML
+  private Label totalPointsLabel;
+
+  static String buildTotalPointsText(Iterable<Assignment> assignments) {
+    int totalPossible = 0;
+    int totalEarned = 0;
+
+    for (Assignment assignment : assignments) {
+      totalPossible += (int) assignment.getMaxGrade();
+      totalEarned += (int) (assignment.getMaxGrade() * 0.8); // temporary mock score
+    }
+
+    return "Total Points: " + totalEarned + " / " + totalPossible;
+  }
+
+  private void updateTotalPoints() {
+    totalPointsLabel.setText(buildTotalPointsText(assignmentTable.getItems()));
+  }
 
   @FXML
   private void handleBack() {
-    // TODO: Navigate back to student dashboard
+    // Temporary: route somewhere that already exists
+    Stage stage = (Stage) assignmentTable.getScene().getWindow();
+    SceneManager sceneManager = new SceneManager(stage);
+    sceneManager.switchScene("/fxml/login.fxml", "Login");
   }
 
   @FXML
   private void handleLogout() {
-    // TODO: Navigate back to login scene
+    Stage stage = (Stage) assignmentTable.getScene().getWindow();
+    SceneManager sceneManager = new SceneManager(stage);
+    sceneManager.switchScene("/fxml/login.fxml", "Login");
   }
 }

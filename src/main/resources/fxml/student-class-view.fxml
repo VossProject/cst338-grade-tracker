@@ -28,10 +28,11 @@
 
   <HBox spacing="10.0">
     <Button text="Back" onAction="#handleBack" />
-    <Button text="Logout" onAction="#handleLogout" />
+    <Button text="Logout" onAction="#handleLogout"
+      style="-fx-background-color: #FF9580; -fx-text-fill: black;"/>
   </HBox>
 
-  <TableView fx:id="assignmentTable" prefWidth="600.0">
+  <TableView fx:id="assignmentTable" prefWidth="450.0">
     <columns>
       <TableColumn fx:id="titleColumn" text="Assignment Title" prefWidth="200.0" />
       <TableColumn fx:id="dueDateColumn" text="Due Date" prefWidth="150.0" />
@@ -39,5 +40,7 @@
       <TableColumn fx:id="maxGradeColumn" text="Max Grade" prefWidth="100.0" />
     </columns>
   </TableView>
+
+  <Label fx:id="totalPointsLabel" text="Total Points: 0 / 0" />
 
 </VBox>
