@@ -14,6 +14,7 @@ public class User {
   private String username;
   private String password;
   private String roleName;
+  private int roleId;
 
   public User(int userId, String username, String password, String roleName) {
     this.userId = userId;
@@ -22,11 +23,27 @@ public class User {
     this.roleName = roleName;
   }
 
+  /**
+   * Constructor for the list of all users
+   * @param userId integer id of the user in the db
+   * @param username String username used for login
+   * @param roleName String name of the user role (e.g., Admin)
+   */
+  public User(int userId, String username, String roleName) {
+    this.userId = userId;
+    this.username = username;
+    this.roleName = roleName;
+    this.roleId = 0;
+    this.password = null;
+  }
+
+
+
   public int getUserId() {
     return userId;
   }
 
-  public String getUsername() {
+  public String getUserName() {
     return username;
   }
 
@@ -36,5 +53,9 @@ public class User {
 
   public String getRoleName() {
     return roleName;
+  }
+
+  public int getRoleId() {
+    return roleId;
   }
 }

@@ -33,7 +33,7 @@ dependencies {
 application {
     mainClass = 'com.gradetracker.GradeTrackerApp'
     mainModule = 'com.gradetracker'
-    applicationDefaultJvmArgs = ['--enable-native-access=javafx.graphics']
+    applicationDefaultJvmArgs = ['--enable-native-access=javafx.graphics', '--add-opens', 'com.gradetracker/com.gradetracker.model=javafx.base']
 }
 
 checkstyle {
