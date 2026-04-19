@@ -85,10 +85,27 @@ public class AssignmentViewController {
   @FXML
   private void initialize() {
     scoreTable.setItems(rows);
+    scoreTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     studentColumn.setCellValueFactory(cell ->
         new SimpleStringProperty(cell.getValue().getStudentName()));
+    studentColumn.setCellFactory(column -> new DividerCell());
     scoreColumn.setCellValueFactory(cell -> cell.getValue().scoreTextProperty());
     scoreColumn.setCellFactory(column -> new LiveTextFieldCell());
+  }
+
+  // Plain text cell with a right border so the Student column reads as
+  // visually separated from the Score column.
+  private static class DividerCell extends TableCell<StudentScoreRow, String> {
+    DividerCell() {
+      setStyle("-fx-border-color: transparent -color-border-default transparent transparent;"
+          + " -fx-border-width: 0 1 0 0;");
+    }
+
+    @Override
+    protected void updateItem(String item, boolean empty) {
+      super.updateItem(item, empty);
+      setText(empty ? null : item);
+    }
   }
 
   /**
