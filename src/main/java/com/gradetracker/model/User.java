@@ -16,12 +16,21 @@ public class User {
   private int roleId;
   private String roleName;
 
-  public User(int userId, String username, String password, int roleId, String roleName) {
+  public User(int userId, String username, String password, String roleName) {
     this.userId = userId;
     this.username = username;
     this.password = password;
-    this.roleId = roleId;
     this.roleName = roleName;
+
+    if ("Admin".equalsIgnoreCase(roleName)) {
+      this.roleId = 1;
+    } else if ("Teacher".equalsIgnoreCase(roleName)) {
+      this.roleId = 2;
+    } else if ("Student".equalsIgnoreCase(roleName)) {
+      this.roleId = 3;
+    } else {
+      this.roleId = 0;
+    }
   }
 
   public int getUserId() {

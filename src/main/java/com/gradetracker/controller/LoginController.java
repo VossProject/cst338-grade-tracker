@@ -1,5 +1,6 @@
 package com.gradetracker.controller;
 
+import com.gradetracker.dao.SqliteUserDao;
 import com.gradetracker.dao.UserDao;
 import com.gradetracker.manager.SceneManager;
 import com.gradetracker.manager.Session;
