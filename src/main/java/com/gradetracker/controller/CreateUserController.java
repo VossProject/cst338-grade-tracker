@@ -1,21 +1,20 @@
 package com.gradetracker.controller;
 
+import com.gradetracker.dao.SqliteUserDao;
+import com.gradetracker.dao.UserDao;
+import com.gradetracker.model.User;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Robert Mozzetti
  * created: 4/13/2026
  * Explanation: Controller for the create user form
  */
-
 public class CreateUserController {
 
   @FXML
@@ -33,8 +32,16 @@ public class CreateUserController {
   @FXML
   private Label messageLabel;
 
-  // Temporary placeholder until a real DAO/database is wired in.
-  private final Set<String> existingUsernames = new HashSet<>();
+  private UserDao userDao = new SqliteUserDao();
+
+  /**
+   * Allows injecting an alternative UserDao implementation (e.g. for testing).
+   *
+   * @param userDao the UserDao implementation to use
+   */
+  public void setUserDao(UserDao userDao) {
+    this.userDao = userDao;
+  }
 
   @FXML
   private void initialize() {
@@ -44,30 +51,25 @@ public class CreateUserController {
             new Role(3, "Student")
     ));
 
-    existingUsernames.add("admin");
-    existingUsernames.add("teacher1");
-
-    // Default message style
     setMessage("", "text-muted");
   }
 
   /**
-   * Helper to apply AtlantaFX message styling.
-   */
-  private void setMessage(String message, String styleClass) {
-    messageLabel.setText(message);
-    messageLabel.getStyleClass().setAll(styleClass);
-  }
-
-  /**
    * Validates user creation form values.
+   *
+   * @param username the entered username
+   * @param roleId the selected role ID, or null if none selected
+   * @param password the entered password
+   * @param confirmPassword the confirmation password entry
+   * @param userDao the UserDao used to check for duplicate usernames
+   * @return error message if invalid, otherwise null
    */
   static String validate(
           String username,
           Integer roleId,
           String password,
           String confirmPassword,
-          Set<String> existing
+          UserDao userDao
   ) {
     if (username == null || username.isBlank()) {
       return "Username is required.";
@@ -87,10 +89,8 @@ public class CreateUserController {
     if (password.length() < 8) {
       return "Password must be at least 8 characters.";
     }
-    for (String existingUsername : existing) {
-      if (existingUsername.equalsIgnoreCase(username)) {
-        return "That username is already taken.";
-      }
+    if (userDao.usernameExists(username)) {
+      return "That username is already taken.";
     }
     return null;
   }
@@ -103,30 +103,25 @@ public class CreateUserController {
     String password = passwordField.getText();
     String confirmPassword = confirmPasswordField.getText();
 
-    String error = validate(
-            username,
-            roleId,
-            password,
-            confirmPassword,
-            existingUsernames
-    );
-
+    String error = validate(username, roleId, password, confirmPassword, userDao);
     if (error != null) {
       setMessage(error, "text-danger");
       return;
     }
 
-    // TODO: Replace this with DAO/database save logic.
-    existingUsernames.add(username);
-
-    setMessage("User created successfully.", "text-success");
-
-    clearForm();
+    try {
+      User newUser = new User(0, username, password, role.toString());
+      userDao.save(newUser);
+      setMessage("User created successfully.", "text-success");
+      clearForm();
+    } catch (IllegalStateException e) {
+      setMessage("Unable to create user right now.", "text-danger");
+    }
   }
 
   @FXML
   private void handleBack() {
-    // TODO: Navigate back once SceneManager routing is connected.
+    // TODO: wire to SceneManager once admin dashboard routing is connected
     setMessage("Back button clicked.", "text-muted");
   }
 
@@ -135,5 +130,16 @@ public class CreateUserController {
     roleComboBox.setValue(null);
     passwordField.clear();
     confirmPasswordField.clear();
+  }
+
+  /**
+   * Applies AtlantaFX message styling to the message label.
+   *
+   * @param message the text to display
+   * @param styleClass the AtlantaFX style class (e.g. "text-danger", "text-success")
+   */
+  private void setMessage(String message, String styleClass) {
+    messageLabel.setText(message);
+    messageLabel.getStyleClass().setAll(styleClass);
   }
 }
