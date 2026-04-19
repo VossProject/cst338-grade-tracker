@@ -70,6 +70,7 @@ public class DashboardController {
     }
   }
 
+
   //TODO: Implement Sign Out logic
   /**
    * Signing out of the app and going back to the login scene
