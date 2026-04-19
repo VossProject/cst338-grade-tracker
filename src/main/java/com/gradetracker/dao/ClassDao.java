@@ -2,6 +2,8 @@ package com.gradetracker.dao;
 
 import com.gradetracker.model.ClassRecord;
 import com.gradetracker.model.User;
+import javafx.collections.ObservableList;
+
 import java.util.List;
 
 /**
@@ -24,4 +26,6 @@ public interface ClassDao {
   void enrollStudent(int classId, int studentId);
 
   boolean isStudentEnrolled(int classId, int studentId);
+
+  ObservableList<ClassRecord> getAllClasses();
 }
