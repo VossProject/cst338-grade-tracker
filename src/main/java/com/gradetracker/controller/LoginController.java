@@ -1,8 +1,10 @@
 package com.gradetracker.controller;
 
 import com.gradetracker.dao.InMemoryUserDao;
+import com.gradetracker.dao.SqliteUserDao;
 import com.gradetracker.dao.UserDao;
 import com.gradetracker.manager.SceneManager;
+import com.gradetracker.manager.Session;
 import com.gradetracker.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -19,7 +21,7 @@ import javafx.stage.Stage;
 public class LoginController {
 
   // TODO: Import and update with correct SQL class
-  private UserDao userDao = new InMemoryUserDao();
+  private UserDao userDao = new SqliteUserDao();
 
   public void setUserDao(UserDao userDao) {
     this.userDao = userDao;

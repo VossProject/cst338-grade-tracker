@@ -13,12 +13,14 @@ public class User {
   private int userId;
   private String username;
   private String password;
+  private int roleId;
   private String roleName;
 
-  public User(int userId, String username, String password, String roleName) {
+  public User(int userId, String username, String password, int roleId, String roleName) {
     this.userId = userId;
     this.username = username;
     this.password = password;
+    this.roleId = roleId;
     this.roleName = roleName;
   }
 
@@ -32,6 +34,10 @@ public class User {
 
   public String getPassword() {
     return password;
+  }
+
+  public int getRoleId() {
+    return roleId;
   }
 
   public String getRoleName() {
