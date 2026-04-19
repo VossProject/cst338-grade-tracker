@@ -36,7 +36,6 @@
   <TextField fx:id="maxGradeField" promptText="Max Grade" />
 
   <HBox spacing="10.0" alignment="CENTER">
-    <Button text="Back" onAction="#handleBack" />
     <Button text="Submit" onAction="#handleSubmit" styleClass="success" />
   </HBox>
 
