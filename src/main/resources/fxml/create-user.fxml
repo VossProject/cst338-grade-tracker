@@ -26,8 +26,7 @@
     <PasswordField fx:id="confirmPasswordField" promptText="Confirm Password" />
 
     <HBox spacing="10.0" alignment="CENTER">
-        <Button text="Back" onAction="#handleBack" />
-        <Button text="Create User" onAction="#handleCreateUser" styleClass="success" />
+        <Button text="Submit" onAction="#handleCreateUser" styleClass="success" />
     </HBox>
 
     <Label fx:id="messageLabel" text="" style="-fx-text-fill: red;" />
