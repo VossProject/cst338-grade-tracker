@@ -173,7 +173,7 @@ public class CreateClassController {
       @Override
       protected void updateItem(User user, boolean empty) {
         super.updateItem(user, empty);
-        setText(empty || user == null ? null : user.getUsername());
+        setText(empty || user == null ? null : user.getUserName());
       }
     };
   }

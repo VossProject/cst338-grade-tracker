@@ -1,10 +1,12 @@
 package com.gradetracker.dao;
 
 import com.gradetracker.model.User;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Robert Mozzetti
@@ -29,10 +31,10 @@ public class SqliteUserDao implements UserDao {
       try (ResultSet rs = stmt.executeQuery()) {
         if (rs.next()) {
           return new User(
-                  rs.getInt("userId"),
-                  rs.getString("userName"),
-                  rs.getString("password"),
-                  rs.getString("roleName")
+              rs.getInt("userId"),
+              rs.getString("userName"),
+              rs.getString("password"),
+              rs.getString("roleName")
           );
         }
       }
@@ -67,12 +69,71 @@ public class SqliteUserDao implements UserDao {
 
     try (Connection conn = DatabaseManager.getInstance().getConnection();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
-      stmt.setString(1, user.getUsername());
+      stmt.setString(1, user.getUserName());
       stmt.setString(2, user.getPassword());
       stmt.setString(3, user.getRoleName());
       stmt.executeUpdate();
     } catch (SQLException e) {
       throw new IllegalStateException("Failed to save user.", e);
     }
+  }
+
+  /**
+   * Returns all users in the database.
+   *
+   * @return a list of all users
+   */
+  /*@Override
+  public List<User> getAllUsers() {
+    String sql = """
+      SELECT u.userId, u.userName, u.password, r.roleName
+      FROM users u
+      JOIN roles r ON r.roleId = u.roleId
+      ORDER BY u.userName
+      """;
+
+    List<User> results = new ArrayList<>();
+    try (Connection conn = DatabaseManager.getInstance().getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+      while (rs.next()) {
+        results.add(new User(
+            rs.getInt("userId"),
+            rs.getString("userName"),
+            rs.getString("password"),
+            rs.getString("roleName")
+        ));
+      }
+    } catch (SQLException e) {
+      throw new IllegalStateException("Failed to load users.", e);
+    }
+    return results;
+  }*/
+
+  @Override
+  public ObservableList<User> getAllUsers() {
+    ObservableList<User> users = FXCollections.observableArrayList();
+
+    String request = """
+        SELECT u.userId, u.userName, r.roleName 
+        FROM users u 
+        JOIN roles r ON u.roleId = r.roleId
+    """;
+
+    try (Connection connection = DatabaseManager.getInstance().getConnection();
+         Statement statement = connection.createStatement();
+         ResultSet response = statement.executeQuery(request)) {
+
+      while (response.next()) {
+        users.add(new User(
+            response.getInt("userId"),
+            response.getString("userName"),
+            response.getString("roleName")
+        ));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return users;
   }
 }
