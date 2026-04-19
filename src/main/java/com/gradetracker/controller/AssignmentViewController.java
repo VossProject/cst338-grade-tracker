@@ -246,11 +246,6 @@ public class AssignmentViewController {
     loadStudentRows();
   }
 
-  @FXML
-  private void handleBack() {
-    // TODO: hook up Back to return to the class view once SPA nav supports it
-  }
-
   private void setStatus(String message, boolean isError) {
     statusLabel.setStyle(isError ? "-fx-text-fill: red;" : "-fx-text-fill: green;");
     statusLabel.setText(message);

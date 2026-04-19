@@ -92,8 +92,4 @@ public class CreateAssignmentController {
     errorLabel.setText("Assignment created.");
   }
 
-  @FXML
-  private void handleBack() {
-    // TODO: navigate back to class view
-  }
 }

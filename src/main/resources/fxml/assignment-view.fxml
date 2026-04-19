@@ -53,8 +53,7 @@
     </columns>
   </TableView>
 
-  <HBox spacing="10.0">
-    <Button text="Back" onAction="#handleBack" />
+  <HBox spacing="10.0" alignment="CENTER">
     <Button fx:id="submitButton" text="Submit"
       onAction="#handleSubmit" styleClass="success" />
   </HBox>
