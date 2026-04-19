@@ -22,19 +22,14 @@ public class SceneManager {
   }
 
   public void switchScene(String fxmlFile, String title) {
-    switchScene(fxmlFile, title, 500, 450); // default size
-  }
-
-  public void switchScene(String fxmlFile, String title, double width, double height) {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
       Parent root = loader.load();
 
-      Scene scene = new Scene(root, width, height);
+      Scene scene = new Scene(root, 500, 450);
       stage.setScene(scene);
       stage.setTitle(title);
       stage.show();
-      stage.centerOnScreen();
     } catch (IOException e) {
       throw new RuntimeException("Failed to load scene: " + fxmlFile, e);
     }
