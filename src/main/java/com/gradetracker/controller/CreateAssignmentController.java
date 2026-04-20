@@ -39,6 +39,14 @@ public class CreateAssignmentController {
   private int classId = 1;
 
   /**
+   * Passing classId to the scene
+   * @param classId int the id of the class in the database
+   */
+  public void setClassId(int classId) {
+    this.classId = classId;
+  }
+
+  /**
    * Validates the assignment form fields.
    *
    * @param title the assignment title

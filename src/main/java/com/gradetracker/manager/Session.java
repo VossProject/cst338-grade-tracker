@@ -13,10 +13,18 @@ public class Session {
   private static Integer userId;
   private static Integer roleId;
 
+  public static final int ROLE_ADMIN = 1;
+  public static final int ROLE_TEACHER = 2;
+  public static final int ROLE_STUDENT = 3;
+
   public static void startSession(int userId, int roleId) {
     Session.userId = userId;
     Session.roleId = roleId;
   }
+
+  public static boolean isAdmin() { return Integer.valueOf(ROLE_ADMIN).equals(roleId); }
+  public static boolean isTeacher() { return Integer.valueOf(ROLE_TEACHER).equals(roleId); }
+  public static boolean isStudent() { return Integer.valueOf(ROLE_STUDENT).equals(roleId); }
 
   public static Integer getUserId() {
     return userId;
