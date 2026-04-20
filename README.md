@@ -36,7 +36,7 @@ Requires Java 25. The Gradle wrapper handles everything else.
 
 ### Workflow
 
-On first launch, the app creates an SQLite database file otterware_grade_tracker.db locally, in C:\Users\<your_username>. 
+On first launch, the app creates an SQLite database file otterware_grade_tracker.db locally, in C:\Users\your_username. 
 The database can be browsed directly with https://sqlitebrowser.org/
 
 The app seeds roles database table with user roles:
