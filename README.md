@@ -36,10 +36,9 @@ Requires Java 25. The Gradle wrapper handles everything else.
 
 ### Workflow
 
-On first launch, the app creates an SQLite database file otterware_grade_tracker.db locally, in C:\Users\your_username. 
-The database can be browsed directly with https://sqlitebrowser.org/
+On first launch, the app creates an SQLite database file (`otterware_grade_tracker.db`) in your home folder: `~` on Mac and Linux, or `C:\Users\<your_username>` on Windows. You can browse the database directly with [DB Browser for SQLite](https://sqlitebrowser.org/).
 
-The app seeds roles database table with user roles:
+The app seeds the `roles` table with:
 - roleId: 1, roleName: "Admin"
 - roleId: 2, roleName: "Teacher"
 - roleId: 3, roleName: "Student"
@@ -61,7 +60,7 @@ Log in as a student to see their classes, assignments, and any grades that have 
 
 ## Still in Progress
 
-- The teacher grading flow isn't fully connected yet. Teachers can create assignments, but opening one up to actually enter scores still needs to be wired through. Everything else is mostly functional for Part 3.
+Teacher grading isn't fully wired up yet. Everything else is mostly functional for Part 3.
 
 ## ERD
 
@@ -70,15 +69,3 @@ Log in as a student to see their classes, assignments, and any grades that have 
 ## Mockups
 
 New mock-ups coming soon.
-
-
-
-
-
-
-
-
-
-
-
-
