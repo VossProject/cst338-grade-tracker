@@ -28,4 +28,8 @@ public interface ClassDao {
   boolean isStudentEnrolled(int classId, int studentId);
 
   ObservableList<ClassRecord> getAllClasses();
+
+  List<ClassRecord> getClassesByTeacher(int teacherId);
+
+  List<ClassRecord> getStudentClasses(int studentId);
 }

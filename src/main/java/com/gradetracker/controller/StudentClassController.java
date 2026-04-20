@@ -24,6 +24,9 @@ public class StudentClassController {
 
   private final AssignmentDao assignmentDao = new SqliteAssignmentDao();
 
+  //Adding the field to pass classId
+  private int classId;
+
   @FXML
   private Label classTitleLabel;
 
@@ -101,4 +104,19 @@ public class StudentClassController {
     SceneManager sceneManager = new SceneManager(stage);
     sceneManager.switchScene("/fxml/login.fxml", "Login");
   }
+
+  /**
+   * Passing classId to the scene
+   * @param classId int the id of the class in the database
+   */
+  public void setClassId(int classId) {
+    this.classId = classId;
+    getClassData(); // Call your DAO here using the ID
+  }
+
+  private void getClassData() {
+    System.out.println("Getting data for class: " + classId);
+    // add your pull from the db here
+  }
+
 }

@@ -35,7 +35,7 @@ public class GradeTrackerApp extends Application {
 
     // TODO: change to login.fxml once login scene is wired up
     SceneManager sceneManager = new SceneManager(stage);
-    sceneManager.switchScene("/fxml/dashboard.fxml", "Grade Tracker");
+    sceneManager.switchScene("/fxml/login.fxml", "Grade Tracker");
   }
 
   public static void main(String[] args) {

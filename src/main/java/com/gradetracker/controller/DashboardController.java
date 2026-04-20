@@ -1,5 +1,6 @@
 package com.gradetracker.controller;
 
+import com.gradetracker.manager.Session;
 import com.gradetracker.model.NavItem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,8 +21,6 @@ import java.io.IOException;
  */
 public class DashboardController {
 
-  //TODO: Make the Dashboard (home scene) preselected on log in
-
   @FXML
   private TreeView<NavItem> navTree;
   @FXML
@@ -40,9 +39,14 @@ public class DashboardController {
     root.getChildren().add(resources);
 
     //Resources sub-items
-    //TODO: implement navigation based on logged in user role
-    resources.getChildren().add(new TreeItem<>(new NavItem("Classes", "/fxml/admin-classes.fxml")));
-    resources.getChildren().add(new TreeItem<>(new NavItem("Users", "/fxml/user-list.fxml")));
+    //List of Users should only be available to admins
+    //Also admins must be able to access the list of all classes
+    if (Session.isAdmin()) {
+      resources.getChildren().add(new TreeItem<>(new NavItem("Classes", "/fxml/admin-classes.fxml")));
+      resources.getChildren().add(new TreeItem<>(new NavItem("Users", "/fxml/user-list.fxml")));
+    } else {
+      resources.getChildren().add(new TreeItem<>(new NavItem("Classes", "/fxml/non-admin-classes.fxml")));
+    }
 
     navTree.setRoot(root);
 
@@ -55,6 +59,9 @@ public class DashboardController {
     // Making the menu take up all available vertical space
     navTree.setMaxHeight(Double.MAX_VALUE);
     VBox.setVgrow(navTree, Priority.ALWAYS);
+
+    //Automatically selecting Dashboard Home after login
+    navTree.getSelectionModel().select(root.getChildren().getFirst());
   }
 
   /**
