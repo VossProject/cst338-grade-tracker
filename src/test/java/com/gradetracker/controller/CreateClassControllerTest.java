@@ -35,8 +35,4 @@ class CreateClassControllerTest {
     String result = CreateClassController.validate("CST 338", "Software Design", null);
     assertEquals("A teacher must be selected.", result);
   }
-
-  //TODO: Manually test for displayed error message in the event a student who is already enrolled is added again
-
-  //TODO: Manually test for displayed error message if a class with a duplicate name is created
 }
