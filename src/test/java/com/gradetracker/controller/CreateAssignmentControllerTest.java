@@ -1,6 +1,8 @@
 package com.gradetracker.controller;
 
+import com.gradetracker.model.Assignment;
 import java.util.Collections;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,6 +31,19 @@ class CreateAssignmentControllerTest {
     assertEquals("Title is required.", result);
   }
 
-  // TODO: testing plan item 2b - no max grade
-  // TODO: testing plan item 3 - duplicate assignment name
+  // Testing plan item 2b: no max grade
+  @Test
+  void emptyMaxGradeReturnsError() {
+    String result = CreateAssignmentController.validate("Homework 1", "", Collections.emptyList());
+    assertEquals("Max grade is required.", result);
+  }
+
+  // Testing plan item 3: duplicate assignment name (case-insensitive)
+  @Test
+  void duplicateTitleReturnsError() {
+    Assignment existing = new Assignment("Homework 1", "", null, 100, 1);
+    String result = CreateAssignmentController.validate(
+        "HOMEWORK 1", "100", List.of(existing));
+    assertEquals("An assignment with this title already exists.", result);
+  }
 }
