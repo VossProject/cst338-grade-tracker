@@ -1,5 +1,6 @@
 package com.gradetracker.controller;
 
+import com.gradetracker.manager.SceneManager;
 import com.gradetracker.manager.Session;
 import com.gradetracker.model.NavItem;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -77,12 +79,15 @@ public class DashboardController {
     }
   }
 
-
-  //TODO: Implement Sign Out logic
   /**
    * Signing out of the app and going back to the login scene
+   * Created by Harvey Duran, I am just moving this to the appropriate scene after it has been created
    */
+  @FXML
   public void signOut(){
-
+    Stage stage = (Stage) contentArea.getScene().getWindow();
+    SceneManager sceneManager = new SceneManager(stage);
+    sceneManager.switchScene("/fxml/login.fxml", "Login");
+    Session.clearSession();
   }
 }
