@@ -42,7 +42,7 @@ public class SceneManager {
       stage.setScene(scene);
       stage.setTitle(title);
       stage.getIcons().add(
-          new Image(getClass().getResourceAsStream("/images/icon.png"))
+          new Image(getClass().getResourceAsStream("/images/icon1.png"))
       );
       stage.show();
     } catch (IOException e) {
