@@ -17,10 +17,21 @@ public class SceneManager {
 
   private final Stage stage;
 
+  /**
+   * Creates a SceneManager for the given stage.
+   *
+   * @param stage the primary stage used for scene switching
+   */
   public SceneManager(Stage stage) {
     this.stage = stage;
   }
 
+  /**
+   * Switches to a new scene using default window size.
+   *
+   * @param fxmlFile the FXML file path to load
+   * @param title the window title
+   */
   public void switchScene(String fxmlFile, String title) {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));

@@ -2,7 +2,9 @@ package com.gradetracker.controller;
 
 import com.gradetracker.model.Assignment;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,27 +18,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class StudentClassControllerTest {
 
   @Test
-  void buildTotalPointsTextReturnsCorrectTotal() {
-    List<Assignment> assignments = List.of(
-        new Assignment("Homework 1", "Intro to JavaFX",
-            LocalDate.of(2026, 4, 20), 100, 1),
-        new Assignment("Quiz 1", "Basic MVC concepts",
-            LocalDate.of(2026, 4, 25), 20, 1),
-        new Assignment("Project Checkpoint", "Login progress",
-            LocalDate.of(2026, 5, 1), 50, 1)
-    );
+  void buildTotalPointsTextReturnsLetterGradeForGraded() {
+    Assignment a1 = new Assignment("Homework 1", "Intro to JavaFX",
+        LocalDate.of(2026, 4, 20), 100, 1);
+    a1.setId(1);
+    Assignment a2 = new Assignment("Quiz 1", "Basic MVC concepts",
+        LocalDate.of(2026, 4, 25), 20, 1);
+    a2.setId(2);
+    Assignment a3 = new Assignment("Project Checkpoint", "Login progress",
+        LocalDate.of(2026, 5, 1), 50, 1);
+    a3.setId(3);
 
-    String result = StudentClassController.buildTotalPointsText(assignments);
+    Map<Integer, Double> grades = new HashMap<>();
+    grades.put(1, 85.0);
+    grades.put(2, 18.0);
 
-    assertEquals("Total Points: 136 / 170", result);
-  }
+    String result = StudentClassController.buildTotalPointsText(
+        List.of(a1, a2, a3), grades);
 
-  @Test
-  void buildTotalPointsTextReturnsZeroWhenNoAssignments() {
-    List<Assignment> assignments = List.of();
-
-    String result = StudentClassController.buildTotalPointsText(assignments);
-
-    assertEquals("Total Points: 0 / 0", result);
+    assertEquals("Grade: B (85.8%)", result);
   }
 }
