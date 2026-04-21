@@ -247,7 +247,7 @@ public class AssignmentViewController {
   }
 
   private void setStatus(String message, boolean isError) {
-    statusLabel.setStyle(isError ? "-fx-text-fill: red;" : "-fx-text-fill: green;");
+    statusLabel.setStyle("-fx-text-fill: " + (isError ? "#FFB86C" : "#50FA7B") + ";");
     statusLabel.setText(message);
   }
 }

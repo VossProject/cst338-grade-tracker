@@ -46,6 +46,11 @@ public class CreateAssignmentController {
     this.classId = classId;
   }
 
+  @FXML
+  public void initialize() {
+    titleField.setOnAction(e -> descriptionField.requestFocus());
+  }
+
   /**
    * Validates the assignment form fields.
    *
@@ -85,8 +90,7 @@ public class CreateAssignmentController {
 
     String error = validate(title, maxGradeText, existing);
     if (error != null) {
-      errorLabel.setStyle("-fx-text-fill: red;");
-      errorLabel.setText(error);
+      setMessage(error, "text-warning");
       return;
     }
 
@@ -96,8 +100,18 @@ public class CreateAssignmentController {
 
     Assignment assignment = new Assignment(title, description, dueDate, maxGrade, classId);
     dao.save(assignment);
-    errorLabel.setStyle("-fx-text-fill: green;");
-    errorLabel.setText("Assignment created.");
+    setMessage("Assignment created.", "text-success");
+  }
+
+  private void setMessage(String message, String styleClass) {
+    errorLabel.setText(message);
+    String color = switch (styleClass) {
+      case "text-success" -> "#50FA7B";
+      case "text-warning" -> "#FFB86C";
+      case "text-danger" -> "#FF5555";
+      default -> "inherit";
+    };
+    errorLabel.setStyle("-fx-text-fill: " + color + ";");
   }
 
 }

@@ -32,7 +32,6 @@ Login view layout for the Grade Tracker application.
   <Button text="Login" onAction="#handleLogin" defaultButton="true"
     style="-fx-background-color: #76D86D; -fx-text-fill: black;"/>
 
-  <Label fx:id="messageLabel" text=""
-    style="-fx-text-fill: #FF9580;"/>
+  <Label fx:id="messageLabel" text=""/>
 
 </VBox>

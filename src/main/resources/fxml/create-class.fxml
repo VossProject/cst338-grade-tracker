@@ -44,10 +44,10 @@
         <Button text="Add Student" onAction="#handleAddStudent" />
     </HBox>
 
+    <Label text="Enrolled Students" style="-fx-font-weight: bold;" />
     <ListView fx:id="enrolledStudentsListView" prefHeight="160.0" />
 
     <HBox spacing="10.0" alignment="CENTER">
-        <Button text="Back" onAction="#handleBack" />
         <Button fx:id="submitButton" text="Submit" onAction="#handleSubmit" styleClass="success" />
     </HBox>
 

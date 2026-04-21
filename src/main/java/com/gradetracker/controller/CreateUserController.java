@@ -53,6 +53,9 @@ public class CreateUserController {
             new Role(3, "Student")
     ));
 
+    usernameField.setOnAction(e -> roleComboBox.requestFocus());
+    passwordField.setOnAction(e -> confirmPasswordField.requestFocus());
+
     setMessage("", "text-muted");
   }
 
@@ -107,7 +110,7 @@ public class CreateUserController {
 
     String error = validate(username, roleId, password, confirmPassword, userDao);
     if (error != null) {
-      setMessage(error, "text-danger");
+      setMessage(error, "text-warning");
       return;
     }
 
@@ -117,7 +120,7 @@ public class CreateUserController {
       setMessage("User created successfully.", "text-success");
       clearForm();
     } catch (IllegalStateException e) {
-      setMessage("Unable to create user right now.", "text-danger");
+      setMessage("Unable to create user right now.", "text-warning");
     }
   }
 
@@ -136,6 +139,12 @@ public class CreateUserController {
    */
   private void setMessage(String message, String styleClass) {
     messageLabel.setText(message);
-    messageLabel.getStyleClass().setAll(styleClass);
+    String color = switch (styleClass) {
+      case "text-success" -> "#50FA7B";
+      case "text-warning" -> "#FFB86C";
+      case "text-danger" -> "#FF5555";
+      default -> "inherit";
+    };
+    messageLabel.setStyle("-fx-text-fill: " + color + ";");
   }
 }
