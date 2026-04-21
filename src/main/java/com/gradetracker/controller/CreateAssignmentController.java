@@ -35,8 +35,7 @@ public class CreateAssignmentController {
   private Label errorLabel;
 
   private AssignmentDao dao = new SqliteAssignmentDao();
-  // TODO: pass classId from class view once navigation supports data passing
-  private int classId = 1;
+  private int classId;
 
   /**
    * Passing classId to the scene
