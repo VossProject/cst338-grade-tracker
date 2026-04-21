@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<Pane prefWidth="300.0" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.gradetracker.controller.ClassCardController" fx:id="cardContainer">
+    <children>
+        <!-- The content area -->
+        <VBox layoutX="10.0" layoutY="20.0"  prefWidth="250.0" alignment="CENTER"
+              style="-fx-background-color: -color-bg-default; -fx-border-color: -color-border-default; -fx-border-width: 1; -fx-padding: 30 15 15 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+            <children>
+                <Label fx:id="classNameText" text="CST777" wrapText="true"
+                       style="-fx-font-size: 30px; -fx-text-fill: -color-fg-default; -fx-font-style: italic;" />
+                <Label fx:id="descriptionText" text="Imaginary Class" wrapText="true"
+                       style="-fx-font-size: 18px; -fx-text-fill: -color-fg-default; -fx-font-style: italic;" />
+                <Label fx:id="teacherText" text="Dr. Wizard"
+                       style="-fx-font-size: 14px; -fx-text-fill: -color-fg-muted; -fx-font-weight: bold;" />
+                <VBox prefWidth="250.0" spacing="10.0">
+                    <MenuButton text="Options" maxWidth="Infinity">
+                        <VBox.margin>
+                            <Insets top="10.0" right="10.0" bottom="10.0" left="10.0" />
+                        </VBox.margin>
+                        <items>
+                            <MenuItem text="View Assignments" onAction="#viewClass"/>
+                            <MenuItem fx:id="createAssignmentItem" text="Create Assignment" onAction="#createAssignment"/>
+                        </items>
+                    </MenuButton>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</Pane>

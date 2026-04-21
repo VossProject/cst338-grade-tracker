@@ -2,6 +2,9 @@ package com.gradetracker.dao;
 
 import com.gradetracker.model.ClassRecord;
 import com.gradetracker.model.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -172,4 +175,108 @@ public class SqliteClassDao implements ClassDao {
 
     return results;
   }
+
+  /**
+   * Get all classes in the database.
+   *
+   * @return a list of all classes
+   */
+  @Override
+  public ObservableList<ClassRecord> getAllClasses() {
+    ObservableList<ClassRecord> classes = FXCollections.observableArrayList();
+
+    String request = """
+        SELECT c.classId, c.className, c.description, u.userName 
+        FROM classes c 
+        JOIN users u ON c.teacherId = u.userId
+    """;
+
+    try (Connection connection = DatabaseManager.getInstance().getConnection();
+         Statement statement = connection.createStatement();
+         ResultSet response = statement.executeQuery(request)) {
+
+      while (response.next()) {
+        classes.add(new ClassRecord(
+            response.getInt("classId"),
+            response.getString("className"),
+            response.getString("description"),
+            response.getString("userName")
+        ));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return classes;
+  }
+
+  /**
+   * Get a list of classes (going to be 1 class per teacher) taught by a specific teacher
+   * @param teacherId the userId of the teacher
+   * @return a list of classes
+   */
+  @Override
+  public List<ClassRecord> getClassesByTeacher(int teacherId) {
+    List<ClassRecord> classes = new ArrayList<>();
+    String request = """
+        SELECT c.classId, c.className, c.description, u.userName 
+        FROM classes c 
+        JOIN users u ON c.teacherId = u.userId
+        WHERE c.teacherId = ?
+    """;
+
+    try (Connection connection = DatabaseManager.getInstance().getConnection();
+         PreparedStatement statement = connection.prepareStatement(request)) {
+      statement.setInt(1, teacherId);
+      ResultSet response = statement.executeQuery();
+
+      while (response.next()) {
+        classes.add(new ClassRecord(
+            response.getInt("classId"),
+            response.getString("className"),
+            response.getString("description"),
+            teacherId,
+            response.getString("userName")
+        ));
+      }
+    } catch (SQLException e) { e.printStackTrace(); }
+    return classes;
+  }
+
+  @Override
+  public List<ClassRecord> getStudentClasses(int studentId) {
+    List<ClassRecord> classes = new ArrayList<>();
+    String request = """
+        SELECT 
+            c.classId, 
+            c.className, 
+            c.description, 
+            c.teacherId, 
+            u.userName AS teacherName
+        FROM student_classes sc
+        JOIN classes c ON sc.classId = c.classId
+        JOIN users u ON c.teacherId = u.userId
+        WHERE sc.studentId = ?
+    """;
+
+    try (Connection connection = DatabaseManager.getInstance().getConnection();
+         PreparedStatement statement = connection.prepareStatement(request)) {
+
+      statement.setInt(1, studentId);
+      ResultSet response = statement.executeQuery();
+
+      while (response.next()) {
+        classes.add(new ClassRecord(
+            response.getInt("classId"),
+            response.getString("className"),
+            response.getString("description"),
+            response.getInt("teacherId"),
+            response.getString("teacherName")
+        ));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return classes;
+  }
+
 }

@@ -9,7 +9,7 @@ module com.gradetracker {
 
   opens com.gradetracker to javafx.fxml, javafx.base;
     opens com.gradetracker.controller to javafx.fxml;
-    opens com.gradetracker.model to javafx.fxml;
+    opens com.gradetracker.model to javafx.fxml, javafx.base;
     // NOTE: new packages with @FXML fields need an opens line here
     exports com.gradetracker;
 }

@@ -1,5 +1,7 @@
 package com.gradetracker.controller;
 
+import com.gradetracker.manager.SceneManager;
+import com.gradetracker.manager.Session;
 import com.gradetracker.model.NavItem;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -19,8 +22,6 @@ import java.io.IOException;
  * @since 4/15/2026
  */
 public class DashboardController {
-
-  //TODO: Make the Dashboard (home scene) preselected on log in
 
   @FXML
   private TreeView<NavItem> navTree;
@@ -40,9 +41,14 @@ public class DashboardController {
     root.getChildren().add(resources);
 
     //Resources sub-items
-    //TODO: implement navigation based on logged in user role
-    resources.getChildren().add(new TreeItem<>(new NavItem("Classes", "/fxml/student-class-view.fxml")));
-    resources.getChildren().add(new TreeItem<>(new NavItem("Users", "/fxml/user-list.fxml")));
+    //List of Users should only be available to admins
+    //Also admins must be able to access the list of all classes
+    if (Session.isAdmin()) {
+      resources.getChildren().add(new TreeItem<>(new NavItem("Classes", "/fxml/admin-classes.fxml")));
+      resources.getChildren().add(new TreeItem<>(new NavItem("Users", "/fxml/user-list.fxml")));
+    } else {
+      resources.getChildren().add(new TreeItem<>(new NavItem("Classes", "/fxml/non-admin-classes.fxml")));
+    }
 
     navTree.setRoot(root);
 
@@ -55,6 +61,9 @@ public class DashboardController {
     // Making the menu take up all available vertical space
     navTree.setMaxHeight(Double.MAX_VALUE);
     VBox.setVgrow(navTree, Priority.ALWAYS);
+
+    //Automatically selecting Dashboard Home after login
+    navTree.getSelectionModel().select(root.getChildren().getFirst());
   }
 
   /**
@@ -70,12 +79,15 @@ public class DashboardController {
     }
   }
 
-
-  //TODO: Implement Sign Out logic
   /**
    * Signing out of the app and going back to the login scene
+   * Created by Harvey Duran, I am just moving this to the appropriate scene after it has been created
    */
+  @FXML
   public void signOut(){
-
+    Stage stage = (Stage) contentArea.getScene().getWindow();
+    SceneManager sceneManager = new SceneManager(stage);
+    sceneManager.switchScene("/fxml/login.fxml", "Login");
+    Session.clearSession();
   }
 }

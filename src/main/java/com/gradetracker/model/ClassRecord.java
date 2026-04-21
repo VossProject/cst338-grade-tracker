@@ -11,11 +11,22 @@ public class ClassRecord {
   private String className;
   private String description;
   private int teacherId;
+  private String userName;
 
-  public ClassRecord(String className, String description, int teacherId) {
+  public ClassRecord(int classId, String className, String description, int teacherId, String teacherName) {
+    this.classId = classId;
     this.className = className;
     this.description = description;
     this.teacherId = teacherId;
+    this.userName = teacherName;
+  }
+
+  public ClassRecord(String className, String description, int teacherId) {
+    this(0, className, description, teacherId, "");
+  }
+
+  public ClassRecord(int classId, String className, String description, String teacherName) {
+    this(classId, className, description, 0, teacherName);
   }
 
   public int getClassId() {
@@ -36,5 +47,9 @@ public class ClassRecord {
 
   public int getTeacherId() {
     return teacherId;
+  }
+
+  public String getUserName() {
+    return userName;
   }
 }
