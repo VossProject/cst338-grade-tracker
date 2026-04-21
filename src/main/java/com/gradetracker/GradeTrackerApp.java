@@ -33,7 +33,6 @@ public class GradeTrackerApp extends Application {
     stage.setX((screen.getWidth() - width) / 2);
     stage.setY((screen.getHeight() - height) / 2);
 
-    // TODO: change to login.fxml once login scene is wired up
     SceneManager sceneManager = new SceneManager(stage);
     sceneManager.switchScene("/fxml/login.fxml", "Grade Tracker");
   }
