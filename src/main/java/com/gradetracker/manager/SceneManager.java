@@ -1,5 +1,6 @@
 package com.gradetracker.manager;
 
+import javafx.scene.image.Image;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -40,6 +41,9 @@ public class SceneManager {
       Scene scene = new Scene(root, 500, 450);
       stage.setScene(scene);
       stage.setTitle(title);
+      stage.getIcons().add(
+          new Image(getClass().getResourceAsStream("/images/icon1.png"))
+      );
       stage.show();
     } catch (IOException e) {
       throw new RuntimeException("Failed to load scene: " + fxmlFile, e);
