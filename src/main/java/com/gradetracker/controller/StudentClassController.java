@@ -275,6 +275,7 @@ public class StudentClassController {
       popup.initModality(Modality.APPLICATION_MODAL);
       popup.setScene(new Scene(root, width, -1));
       popup.showAndWait();
+      getClassData();
     } catch (IOException e) {
       e.printStackTrace();
     }
