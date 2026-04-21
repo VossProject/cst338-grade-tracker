@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <!--
-
+Login view layout for the Grade Tracker application.
 
 @author Harvey Duran
 @since 04/24/26
@@ -25,9 +25,9 @@
   <Label text="Grade Tracker"
     style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
-  <TextField fx:id="usernameField" promptText="Username" />
+  <TextField fx:id="usernameField" promptText="Username" maxWidth="300.0" />
 
-  <PasswordField fx:id="passwordField" promptText="Password" />
+  <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300.0" />
 
   <Button text="Login" onAction="#handleLogin" defaultButton="true"
     style="-fx-background-color: #76D86D; -fx-text-fill: black;"/>

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <!--
-
+Student class details view showing class info and assignment list.
 
 @author Harvey Duran
 @since 04/24/26
@@ -28,8 +28,6 @@
 
   <HBox spacing="10.0">
     <Button text="Back" onAction="#handleBack" />
-    <Button text="Logout" onAction="#handleLogout"
-      style="-fx-background-color: #FF9580; -fx-text-fill: black;"/>
   </HBox>
 
   <TableView fx:id="assignmentTable" prefWidth="450.0">
@@ -38,9 +36,10 @@
       <TableColumn fx:id="dueDateColumn" text="Due Date" prefWidth="150.0" />
       <TableColumn fx:id="scoreColumn" text="Score" prefWidth="100.0" />
       <TableColumn fx:id="maxGradeColumn" text="Max Grade" prefWidth="100.0" />
+      <TableColumn fx:id="gradeColumn" text="" prefWidth="85.0" minWidth="85.0" maxWidth="85.0" />
     </columns>
   </TableView>
 
-  <Label fx:id="totalPointsLabel" text="Total Points: 0 / 0" />
+  <Label fx:id="totalPointsLabel" text="Grade: Not Graded" />
 
 </VBox>
