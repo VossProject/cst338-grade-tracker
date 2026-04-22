@@ -1,11 +1,14 @@
 package com.gradetracker.controller;
 
 import com.gradetracker.dao.AssignmentDao;
+import com.gradetracker.dao.ClassDao;
 import com.gradetracker.dao.GradeDao;
 import com.gradetracker.dao.SqliteAssignmentDao;
+import com.gradetracker.dao.SqliteClassDao;
 import com.gradetracker.dao.SqliteGradeDao;
 import com.gradetracker.manager.Session;
 import com.gradetracker.model.Assignment;
+import com.gradetracker.model.ClassRecord;
 import com.gradetracker.model.Grade;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -29,6 +32,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * Student class view controller to view assignments.
@@ -40,6 +45,7 @@ public class StudentClassController {
 
   private final AssignmentDao assignmentDao = new SqliteAssignmentDao();
   private final GradeDao gradeDao = new SqliteGradeDao();
+  private final ClassDao classDao = new SqliteClassDao();
 
   private int classId;
 
@@ -58,7 +64,7 @@ public class StudentClassController {
   private TableColumn<Assignment, String> titleColumn;
 
   @FXML
-  private TableColumn<Assignment, LocalDate> dueDateColumn;
+  private TableColumn<Assignment, String> dueDateColumn;
 
   @FXML
   private TableColumn<Assignment, String> scoreColumn;
@@ -78,14 +84,18 @@ public class StudentClassController {
   public void initialize() {
     assignmentTable.setPlaceholder(new Label("No assignments available"));
     assignmentTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    classTitleLabel.setText("CST 338 - Software Design");
-    classDescriptionLabel.setText("Current assignments for this class");
 
     titleColumn.setCellValueFactory(cellData ->
         new SimpleStringProperty(cellData.getValue().getTitle()));
 
+    DateTimeFormatter formatter =
+        DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+
     dueDateColumn.setCellValueFactory(cellData ->
-        new SimpleObjectProperty<>(cellData.getValue().getDueDate()));
+        new SimpleStringProperty(
+            cellData.getValue().getDueDate().format(formatter)
+        )
+    );
 
     maxGradeColumn.setCellValueFactory(cellData ->
         new SimpleIntegerProperty((int) cellData.getValue().getMaxGrade()).asObject());
@@ -231,6 +241,11 @@ public class StudentClassController {
    */
   public void setClassId(int classId) {
     this.classId = classId;
+    ClassRecord classRecord = classDao.findById(classId);
+    if (classRecord != null) {
+      classTitleLabel.setText(classRecord.getClassName());
+      classDescriptionLabel.setText(classRecord.getDescription());
+    }
     getClassData();
   }
 

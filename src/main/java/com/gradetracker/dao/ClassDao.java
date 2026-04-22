@@ -32,4 +32,12 @@ public interface ClassDao {
   List<ClassRecord> getClassesByTeacher(int teacherId);
 
   List<ClassRecord> getStudentClasses(int studentId);
+
+  /**
+   * Looks up a single class by its primary key.
+   *
+   * @param classId the id of the class to fetch
+   * @return the matching ClassRecord, or null if no class has this id
+   */
+  ClassRecord findById(int classId);
 }

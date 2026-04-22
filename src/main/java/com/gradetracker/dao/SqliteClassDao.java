@@ -243,6 +243,35 @@ public class SqliteClassDao implements ClassDao {
   }
 
   @Override
+  public ClassRecord findById(int classId) {
+    String request = """
+        SELECT c.classId, c.className, c.description, c.teacherId, u.userName
+        FROM classes c
+        JOIN users u ON c.teacherId = u.userId
+        WHERE c.classId = ?
+        """;
+
+    try (Connection connection = DatabaseManager.getInstance().getConnection();
+         PreparedStatement statement = connection.prepareStatement(request)) {
+      statement.setInt(1, classId);
+      try (ResultSet response = statement.executeQuery()) {
+        if (response.next()) {
+          return new ClassRecord(
+              response.getInt("classId"),
+              response.getString("className"),
+              response.getString("description"),
+              response.getInt("teacherId"),
+              response.getString("userName")
+          );
+        }
+      }
+    } catch (SQLException e) {
+      throw new IllegalStateException("Failed to find class by id.", e);
+    }
+    return null;
+  }
+
+  @Override
   public List<ClassRecord> getStudentClasses(int studentId) {
     List<ClassRecord> classes = new ArrayList<>();
     String request = """

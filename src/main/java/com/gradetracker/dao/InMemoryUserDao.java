@@ -74,8 +74,8 @@ public class InMemoryUserDao implements UserDao {
     """;
 
     try (Connection connection = DatabaseManager.getInstance().getConnection();
-         Statement statement = connection.createStatement();
-         ResultSet response = statement.executeQuery(request)) {
+        Statement statement = connection.createStatement();
+        ResultSet response = statement.executeQuery(request)) {
 
       while (response.next()) {
         users.add(new User(
