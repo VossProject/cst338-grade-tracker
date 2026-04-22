@@ -11,7 +11,6 @@ import com.gradetracker.model.Assignment;
 import com.gradetracker.model.ClassRecord;
 import com.gradetracker.model.Grade;
 import java.io.IOException;
-import java.lang.classfile.ClassModel;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -44,9 +43,9 @@ import java.time.format.FormatStyle;
  */
 public class StudentClassController {
 
-  private final ClassDao classDao = new SqliteClassDao();
   private final AssignmentDao assignmentDao = new SqliteAssignmentDao();
   private final GradeDao gradeDao = new SqliteGradeDao();
+  private final ClassDao classDao = new SqliteClassDao();
 
   private int classId;
 
@@ -242,29 +241,15 @@ public class StudentClassController {
    */
   public void setClassId(int classId) {
     this.classId = classId;
+    ClassRecord classRecord = classDao.findById(classId);
+    if (classRecord != null) {
+      classTitleLabel.setText(classRecord.getClassName());
+      classDescriptionLabel.setText(classRecord.getDescription());
+    }
     getClassData();
   }
 
   private void getClassData() {
-    List<ClassRecord> myClasses = classDao.getStudentClasses(Session.getUserId());
-
-    ClassRecord selectedClass = null;
-    for (ClassRecord classRecord : myClasses) {
-      if (classRecord.getClassId() == this.classId) {
-        selectedClass = classRecord;
-        break;
-      }
-    }
-
-    if (selectedClass != null) {
-      classTitleLabel.setText(selectedClass.getClassName());
-      classDescriptionLabel.setText(selectedClass.getDescription());
-    }
-    else {
-      classTitleLabel.setText("Class not found");
-      classDescriptionLabel.setText("");
-    }
-
     final List<Assignment> assignments = assignmentDao.findByClassId(this.classId);
     List<Grade> myGrades = gradeDao.findByStudentId(Session.getUserId());
 
@@ -275,7 +260,7 @@ public class StudentClassController {
 
     scoreColumn.setCellValueFactory(cellData -> {
       Double grade = gradesByAssignment.get(cellData.getValue().getId());
-      return new SimpleStringProperty(grade != null ? formatGrade(grade) : "Not graded");
+      return new SimpleStringProperty(grade != null ? formatGrade(grade) : "Not Graded");
     });
 
     assignmentTable.getItems().setAll(assignments);
