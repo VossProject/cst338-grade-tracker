@@ -33,6 +33,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * Student class view controller to view assignments.
@@ -63,7 +65,7 @@ public class StudentClassController {
   private TableColumn<Assignment, String> titleColumn;
 
   @FXML
-  private TableColumn<Assignment, LocalDate> dueDateColumn;
+  private TableColumn<Assignment, String> dueDateColumn;
 
   @FXML
   private TableColumn<Assignment, String> scoreColumn;
@@ -87,8 +89,14 @@ public class StudentClassController {
     titleColumn.setCellValueFactory(cellData ->
         new SimpleStringProperty(cellData.getValue().getTitle()));
 
+    DateTimeFormatter formatter =
+        DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+
     dueDateColumn.setCellValueFactory(cellData ->
-        new SimpleObjectProperty<>(cellData.getValue().getDueDate()));
+        new SimpleStringProperty(
+            cellData.getValue().getDueDate().format(formatter)
+        )
+    );
 
     maxGradeColumn.setCellValueFactory(cellData ->
         new SimpleIntegerProperty((int) cellData.getValue().getMaxGrade()).asObject());
