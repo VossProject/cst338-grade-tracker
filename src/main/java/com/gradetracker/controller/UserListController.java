@@ -1,6 +1,6 @@
 package com.gradetracker.controller;
 
-import com.gradetracker.dao.SqliteUserDao;
+import com.gradetracker.dao.DaoProvider;
 import com.gradetracker.dao.UserDao;
 import com.gradetracker.model.User;
 import javafx.collections.FXCollections;
@@ -39,7 +39,7 @@ public class UserListController {
   @FXML
   private TableColumn<User, String> roleColumn;
 
-  private final UserDao userDao = new SqliteUserDao();
+  private final UserDao userDao = DaoProvider.userDao();
 
   /**
    * Initializing the list of users table

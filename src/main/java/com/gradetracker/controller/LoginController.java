@@ -1,6 +1,6 @@
 package com.gradetracker.controller;
 
-import com.gradetracker.dao.SqliteUserDao;
+import com.gradetracker.dao.DaoProvider;
 import com.gradetracker.dao.UserDao;
 import com.gradetracker.manager.SceneManager;
 import com.gradetracker.manager.Session;
@@ -19,7 +19,7 @@ import javafx.stage.Stage;
  */
 public class LoginController {
 
-  private UserDao userDao = new SqliteUserDao();
+  private UserDao userDao = DaoProvider.userDao();
 
   public void setUserDao(UserDao userDao) {
     this.userDao = userDao;

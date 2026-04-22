@@ -1,13 +1,17 @@
 package com.gradetracker.controller;
 
 import com.gradetracker.dao.AssignmentDao;
+import com.gradetracker.dao.ClassDao;
 import com.gradetracker.dao.GradeDao;
 import com.gradetracker.dao.SqliteAssignmentDao;
+import com.gradetracker.dao.SqliteClassDao;
 import com.gradetracker.dao.SqliteGradeDao;
 import com.gradetracker.manager.Session;
 import com.gradetracker.model.Assignment;
+import com.gradetracker.model.ClassRecord;
 import com.gradetracker.model.Grade;
 import java.io.IOException;
+import java.lang.classfile.ClassModel;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +42,7 @@ import javafx.stage.Stage;
  */
 public class StudentClassController {
 
+  private final ClassDao classDao = new SqliteClassDao();
   private final AssignmentDao assignmentDao = new SqliteAssignmentDao();
   private final GradeDao gradeDao = new SqliteGradeDao();
 
@@ -78,8 +83,6 @@ public class StudentClassController {
   public void initialize() {
     assignmentTable.setPlaceholder(new Label("No assignments available"));
     assignmentTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    classTitleLabel.setText("CST 338 - Software Design");
-    classDescriptionLabel.setText("Current assignments for this class");
 
     titleColumn.setCellValueFactory(cellData ->
         new SimpleStringProperty(cellData.getValue().getTitle()));
@@ -235,6 +238,25 @@ public class StudentClassController {
   }
 
   private void getClassData() {
+    List<ClassRecord> myClasses = classDao.getStudentClasses(Session.getUserId());
+
+    ClassRecord selectedClass = null;
+    for (ClassRecord classRecord : myClasses) {
+      if (classRecord.getClassId() == this.classId) {
+        selectedClass = classRecord;
+        break;
+      }
+    }
+
+    if (selectedClass != null) {
+      classTitleLabel.setText(selectedClass.getClassName());
+      classDescriptionLabel.setText(selectedClass.getDescription());
+    }
+    else {
+      classTitleLabel.setText("Class not found");
+      classDescriptionLabel.setText("");
+    }
+
     final List<Assignment> assignments = assignmentDao.findByClassId(this.classId);
     List<Grade> myGrades = gradeDao.findByStudentId(Session.getUserId());
 
@@ -245,7 +267,7 @@ public class StudentClassController {
 
     scoreColumn.setCellValueFactory(cellData -> {
       Double grade = gradesByAssignment.get(cellData.getValue().getId());
-      return new SimpleStringProperty(grade != null ? formatGrade(grade) : "Not Graded");
+      return new SimpleStringProperty(grade != null ? formatGrade(grade) : "Not graded");
     });
 
     assignmentTable.getItems().setAll(assignments);
