@@ -79,13 +79,13 @@ public class CreateClassController {
   private void handleAddStudent() {
     User selectedStudent = studentComboBox.getValue();
     if (selectedStudent == null) {
-      setMessage("Select a student to enroll.", "text-danger");
+      setMessage("Select a student to enroll.", "text-warning");
       return;
     }
 
     for (User enrolledStudent : enrolledStudents) {
       if (enrolledStudent.getUserId() == selectedStudent.getUserId()) {
-        setMessage("That student is already enrolled in this class.", "text-danger");
+        setMessage("That student is already enrolled in this class.", "text-warning");
         return;
       }
     }
@@ -103,7 +103,7 @@ public class CreateClassController {
 
     String error = validate(className, description, selectedTeacher);
     if (error != null) {
-      setMessage(error, "text-danger");
+      setMessage(error, "text-warning");
       return;
     }
 
@@ -129,16 +129,11 @@ public class CreateClassController {
     } catch (IllegalStateException e) {
       String message = e.getMessage();
       if (message != null && message.contains("UNIQUE")) {
-        setMessage("A class with that name already exists.", "text-danger");
+        setMessage("A class with that name already exists.", "text-warning");
         return;
       }
-      setMessage("Unable to create class right now.", "text-danger");
+      setMessage("Unable to create class right now.", "text-warning");
     }
-  }
-
-  @FXML
-  private void handleBack() {
-    setMessage("Back button clicked.", "text-muted");
   }
 
   private void loadTeachers() {
@@ -148,7 +143,7 @@ public class CreateClassController {
     if (teachers.isEmpty()) {
       teacherComboBox.setDisable(true);
       submitButton.setDisable(true);
-      setMessage("No teachers available. Create a teacher account first.", "text-danger");
+      setMessage("No teachers available. Create a teacher account first.", "text-warning");
       return;
     }
 
@@ -188,6 +183,12 @@ public class CreateClassController {
 
   private void setMessage(String message, String styleClass) {
     messageLabel.setText(message);
-    messageLabel.getStyleClass().setAll(styleClass);
+    String color = switch (styleClass) {
+      case "text-success" -> "#50FA7B";
+      case "text-warning" -> "#FFB86C";
+      case "text-danger" -> "#FF5555";
+      default -> "inherit";
+    };
+    messageLabel.setStyle("-fx-text-fill: " + color + ";");
   }
 }

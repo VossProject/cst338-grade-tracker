@@ -37,6 +37,22 @@ public class LoginController {
   @FXML
   private Label messageLabel;
 
+  @FXML
+  public void initialize() {
+    usernameField.setOnAction(e -> passwordField.requestFocus());
+  }
+
+  private void setMessage(String message, String styleClass) {
+    messageLabel.setText(message);
+    String color = switch (styleClass) {
+      case "text-success" -> "#50FA7B";
+      case "text-warning" -> "#FFB86C";
+      case "text-danger" -> "#FF5555";
+      default -> "inherit";
+    };
+    messageLabel.setStyle("-fx-text-fill: " + color + ";");
+  }
+
   /**
    * Validates the username and password fields.
    *
@@ -67,14 +83,14 @@ public class LoginController {
 
     String error = validate(username, password);
     if (error != null) {
-      messageLabel.setText(error);
+      setMessage(error, "text-warning");
       return;
     }
 
     User user = userDao.authenticate(username, password);
 
     if (user == null) {
-      messageLabel.setText("Invalid username or password.");
+      setMessage("Invalid username or password.", "text-warning");
       return;
     }
 

@@ -21,7 +21,7 @@ public class SqliteUserDao implements UserDao {
         SELECT u.userId, u.userName, u.password, r.roleName
         FROM users u
         JOIN roles r ON r.roleId = u.roleId
-        WHERE u.userName = ? AND u.password = ?
+        WHERE u.userName = ? COLLATE NOCASE AND u.password = ?
         """;
 
     try (Connection conn = DatabaseManager.getInstance().getConnection();
