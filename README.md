@@ -54,18 +54,15 @@ Log in as the admin to set up the rest of the data.
 2. Create classes. Each class takes a name, description, and an assigned teacher. There can be only 1 teacher per class, so make sure there is an available teacher, otherwise the dropdown will not populate.
 3. Enroll students into their classes.
 
-Log out and log back in as a teacher to see the classes assigned to them, create assignments, and (partially) enter grades <-- IN PROGRESS.
+Log out and log back in as a teacher to see the classes assigned to them, create assignments, and enter grades.
 
-Log in as a student to see their classes, assignments, and any grades that have been entered. <-- IN PROGRESS.
-
-## Still in Progress
-
-Teacher grading isn't fully wired up yet. Everything else is mostly functional for Part 3.
+Log in as a student to see their classes, assignments, and any grades that have been entered.
 
 ## ERD
 
-<img width="1068" height="745" alt="ERD" src="https://github.com/user-attachments/assets/c124e65e-c437-4429-832e-004068b461dd" />
+<img width="1110" height="673" alt="new-erd" src="https://github.com/user-attachments/assets/723b81b6-9e00-4cdc-97c3-78bdf08e77e7" />
 
-## Mockups
+## Scenes
+### Login
+<img width="1616" height="858" alt="login" src="https://github.com/user-attachments/assets/f2756905-dbf8-4efd-83e7-27037c30407f" />
 
-New mock-ups coming soon.
