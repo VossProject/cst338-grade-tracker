@@ -62,10 +62,10 @@ public class HomeController {
           });
         }
       } catch (Exception e) {
-        //In case of an error, falling back to our placeholder quote
+        //In case of an error, falling back to a placeholder quote
         Platform.runLater(() -> {
           quoteText.setText("\"Work hard, nap hard.\"");
-          quoteAuthor.setText("- Otterware");
+          quoteAuthor.setText("- Otterware Team");
         });
       }
     });
