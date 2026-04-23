@@ -37,7 +37,7 @@
                             </children>
                         </VBox>
                         <!-- The ribbon -->
-                        <Label layoutX="0.0" layoutY="30.0" text="QUOTE OF THE DAY"
+                        <Label layoutX="0.0" layoutY="30.0" text="QUOTE OF THE DAY:"
                                style="-fx-background-color: -color-accent-emphasis; -fx-text-fill: -color-fg-emphasis; -fx-padding: 5 15 5 15; -fx-font-weight: bold; -fx-font-size: 11px; -fx-background-radius: 0 5 5 0;" />
                         <!-- The fold -->
                         <Region layoutX="0.0" layoutY="56.0" prefHeight="8.0" prefWidth="10.0"
@@ -60,7 +60,7 @@
                             </children>
                         </VBox>
                         <!-- The ribbon -->
-                        <Label layoutX="0.0" layoutY="30.0" text="CLOCK"
+                        <Label layoutX="0.0" layoutY="30.0" text="CLOCK:"
                                style="-fx-background-color: -color-accent-emphasis; -fx-text-fill: -color-fg-emphasis; -fx-padding: 5 15 5 15; -fx-font-weight: bold; -fx-font-size: 11px; -fx-background-radius: 0 5 5 0;" />
                         <!-- The fold -->
                         <Region layoutX="0.0" layoutY="56.0" prefHeight="8.0" prefWidth="10.0"
